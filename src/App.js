@@ -1,23 +1,27 @@
-import logo from './logo.svg';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import './App.css';
+import './Song.css';
+import { Carousel } from 'react-responsive-carousel';
+import { Vestlandet } from './songs/Vestlandet';
+import { NuKlinger } from './songs/NuKlinger';
+import { SognOgFjordane } from './songs/SognOgFjordane';
+import { HappyNewYear } from './songs/HappyNewYear';
+import { Askepott } from './songs/Askepott';
+import { HeyHo } from './songs/HeyHo';
+import { GodJul } from './songs/GodJul';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Carousel showThumbs={false}>
+        <Vestlandet />
+        <NuKlinger />
+        <SognOgFjordane />
+        <HappyNewYear />
+        <Askepott />
+        <HeyHo />
+        <GodJul />
+      </Carousel>
     </div>
   );
 }
