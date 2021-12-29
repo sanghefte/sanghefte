@@ -16,8 +16,9 @@ import { ViEreEnNasjonViMed } from './songs/ViEreEnNasjonViMed';
 type Hefte = 'grunnlovsdag' | 'nyttår';
 
 export function SangHefte() {
-	const hefte: Hefte = 'grunnlovsdag';
+	const hefte: Hefte = 'nyttår';
 
+	// @ts-ignore
 	if (hefte === 'grunnlovsdag') {
 		return (
 			<div className="App">
