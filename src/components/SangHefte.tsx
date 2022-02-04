@@ -1,17 +1,17 @@
 import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
-import { Askepott } from './songs/Askepott';
-import { GodJul } from './songs/GodJul';
-import { HappyNewYear } from './songs/HappyNewYear';
-import { HeyHo } from './songs/HeyHo';
-import { JaViElsker } from './songs/JaViElsker';
-import { MellomBakkarOgBerg } from './songs/MellomBakkarOgBerg';
-import { NorgeIRødtHvitOgBlått } from './songs/NorgeIRødtHvitOgBlått';
-import { NuKlinger } from './songs/NuKlinger';
-import { SognOgFjordane } from './songs/SognOgFjordane';
-import { TilUngdommen } from './songs/TilUngdommen';
-import { Vestlandet } from './songs/Vestlandet';
-import { ViEreEnNasjonViMed } from './songs/ViEreEnNasjonViMed';
+import { Askepott } from '../songs/Askepott';
+import { GodJul } from '../songs/GodJul';
+import { HappyNewYear } from '../songs/HappyNewYear';
+import { HeyHo } from '../songs/HeyHo';
+import { JaViElsker } from '../songs/JaViElsker';
+import { MellomBakkarOgBerg } from '../songs/MellomBakkarOgBerg';
+import { NorgeIRødtHvitOgBlått } from '../songs/NorgeIRødtHvitOgBlått';
+import { NuKlinger } from '../songs/NuKlinger';
+import { SognOgFjordane } from '../songs/SognOgFjordane';
+import { TilUngdommen } from '../songs/TilUngdommen';
+import { Vestlandet } from '../songs/Vestlandet';
+import { ViEreEnNasjonViMed } from '../songs/ViEreEnNasjonViMed';
 
 type Hefte = 'grunnlovsdag' | 'nyttår';
 

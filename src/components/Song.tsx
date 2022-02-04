@@ -1,5 +1,5 @@
 import React from "react";
-import './Song.css';
+import '../Song.css';
 
 type SongProps = {
     lyrics: string;
