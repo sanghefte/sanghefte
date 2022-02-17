@@ -25,7 +25,6 @@ function App() {
 
   return (
     <div>
-      Hello!
       {data.map((d, index) => {
         return (
           <div key={index}>
