@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
 import "./Song.css";
-import {getAllSongs, Song} from "./util/firestoreFunctions";
+import {getAllSongs, Song, createSanghefte} from "./util/firestoreFunctions";
 
 function App() {
     const [data, setData] = useState<Array<Song>>([]);
@@ -28,6 +28,7 @@ function App() {
                     </div>
                 )
             }))}
+            <button onClick={createSanghefte}>Create Sanghefte</button>
       </div>
   );
 }
