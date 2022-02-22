@@ -2,10 +2,11 @@ import React, {useState, useEffect} from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
 import "./Song.css";
-import {getAllSongs, Song, createSanghefte} from "./util/firestoreFunctions";
+import {getAllSongs, Song, createSanghefte, deleteSanghefte} from "./util/firestoreFunctions";
 
 function App() {
     const [data, setData] = useState<Array<Song>>([]);
+    const [sanghefteName, setSanghefteName] = useState("")
 
     useEffect(() => {
         fetchSongs();
@@ -28,8 +29,10 @@ function App() {
                     </div>
                 )
             }))}
-            <button onClick={createSanghefte}>Create Sanghefte</button>
-      </div>
+            <input type={"text"} onChange={e => setSanghefteName(e.target.value)}/>
+            <button onClick={() => createSanghefte(sanghefteName)}>Create Sanghefte</button>
+            <button onClick={() => deleteSanghefte(sanghefteName)}>Delete Sanghefte</button>
+        </div>
   );
 }
 
