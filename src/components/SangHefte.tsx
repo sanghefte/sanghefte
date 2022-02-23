@@ -12,6 +12,7 @@ import { SognOgFjordane } from '../songs/SognOgFjordane';
 import { TilUngdommen } from '../songs/TilUngdommen';
 import { Vestlandet } from '../songs/Vestlandet';
 import { ViEreEnNasjonViMed } from '../songs/ViEreEnNasjonViMed';
+import { SongContainer } from './SongContainer';
 
 type Hefte = 'grunnlovsdag' | 'nyttår';
 
@@ -38,7 +39,8 @@ export function SangHefte() {
 	if (hefte === 'nyttår') {
 		return (
 			<div className="App">
-				<Carousel showThumbs={false}>
+				<Carousel showThumbs={false} swipeScrollTolerance={100} >
+					<SongContainer />
 					<Vestlandet />
 					<NuKlinger />
 					<SognOgFjordane />

@@ -9,6 +9,8 @@ import { FaMoon, FaSun } from "react-icons/fa";
 
 type ColorModeSwitcherProps = Omit<IconButtonProps, "aria-label">;
 
+//This ColorModeSwitcher is a complimentary Button from ChakraUI that allows you to easily switch from light/darkmode.
+
 export const ColorModeSwitcher: React.FC<ColorModeSwitcherProps> = (props) => {
   const { toggleColorMode } = useColorMode();
   const text = useColorModeValue("dark", "light");
