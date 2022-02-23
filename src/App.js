@@ -7,6 +7,11 @@ import { collection, getDocs } from "firebase/firestore";
 import { ChakraProvider } from '@chakra-ui/react'
 import { LandingPage } from "./components/LandingPage"
 import { ColorModeSwitcher } from "./components/ColorModeSwitcher"
+import { NewSong } from "./components/NewSong"
+import { Header } from "./components/Header"
+import { SongContainer } from "./components/SongContainer"
+import { SangHefte } from "./components/SangHefte"
+import theme from "./theme/theme"
 
 function App() {
   const [data, setData] = useState([]);
@@ -27,8 +32,9 @@ function App() {
   }, []);
 
   return (
-      <ChakraProvider>
-        <LandingPage />
+      <ChakraProvider theme={theme}>
+          <Header />
+          <NewSong />
       </ChakraProvider>
   );
 }

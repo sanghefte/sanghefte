@@ -6,7 +6,6 @@ export const LandingPage = () => {
     const bgcolor = useColorModeValue("white", "whiteAlpha.50");
   return (
     <Box>
-      <Header />
       <Flex
         align="center"
         justify={{ base: "center", md: "space-around", xl: "space-between" }}
