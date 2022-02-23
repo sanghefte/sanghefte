@@ -41,8 +41,38 @@ export const createSanghefte = async (docName: string) => {
         });
     }
 }
-
+/*
+Hvis sangheftet "tittel" finnes så slettes den
+ */
 export const deleteSanghefte = async(docName: string) => {
     const docRef= doc(db, "sanghefter", docName)
-    await deleteDoc(docRef);
+    const docSnap = await getDoc(docRef)
+    if(docSnap.exists()){
+        await deleteDoc(docRef);
+    }
+    else{
+        console.log("Sangheftet finnes ikke!")
+    }
+}
+
+/*
+update/create sang
+ */
+export const createSong = async(pathSegment: string, songTitle: string, text: string, creator: string, melody: string) => {
+    const docRef= doc(db, "sanghefter", pathSegment, "sanger", songTitle)
+    setDoc(docRef, {
+        title: songTitle,
+        text: text,
+        creatot: creator,
+        melody: melody,
+    })
+}
+
+/*
+Delete sang
+ */
+export const deleteSong = async(pathSegment: string, songTitle: string) => {
+    const docRef= doc(db, "sanghefter", pathSegment, "sanger", songTitle)
+    deleteDoc(docRef);
+    console.log("Deleted " + songTitle)
 }
