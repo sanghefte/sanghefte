@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
+import "./Song.css";
 import { db } from "./util/firebase-config";
 import { collection, getDocs } from "firebase/firestore";
 
