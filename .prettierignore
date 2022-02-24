@@ -2,6 +2,7 @@
 build
 node_modules
 public
+src/songs
 
 # Ignore all HTML files:
 *.html
