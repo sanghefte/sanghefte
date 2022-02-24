@@ -1,14 +1,10 @@
 import React from "react";
-import '../Song.css';
+import "../Song.css";
 
 type SongProps = {
-    lyrics: string;
+  lyrics: string;
 };
 
 export function Song({ lyrics }: SongProps) {
-    return (
-        <div className="song">
-            {lyrics}
-        </div>
-    );
+  return <div className="song">{lyrics}</div>;
 }

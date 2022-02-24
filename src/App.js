@@ -14,9 +14,9 @@ function App() {
     const getData = async () => {
       const data = await getDocs(dataCollectionRef);
       setData(
-        data.docs.map(doc => ({
+        data.docs.map((doc) => ({
           ...doc.data(),
-          id: doc.id
+          id: doc.id,
         }))
       );
     };
