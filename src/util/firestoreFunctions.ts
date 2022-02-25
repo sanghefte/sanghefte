@@ -37,8 +37,7 @@ export const createSanghefte = async (docName: string) => {
         console.log("JA DEN FINNES")
     }
     else{
-        setDoc(doc(db, "sanghefter", docName), {
-        });
+        await setDoc(doc(db, "sanghefter", docName), {});
     }
 }
 /*

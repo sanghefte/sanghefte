@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="559a8a0f-f764-4f82-b6f3-a8439ac01de2" name="Changes" comment="ADD: mulighet for å opprette sang fra frontend siden">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/LandingPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LandingPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/NewSong.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NewSong.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/firestoreFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/firestoreFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,8 +72,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1645703549104</updated>
-      <workItem from="1645703551472" duration="2341000" />
+      <workItem from="1645703551472" duration="7417000" />
     </task>
+    <task id="LOCAL−00001" summary="ADD: mulighet for å opprette sang fra frontend siden">
+      <created>1645705945697</created>
+      <option name="number" value="LOCAL−00001" />
+      <option name="presentableId" value="LOCAL−00001" />
+      <updated>1645705945697</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
