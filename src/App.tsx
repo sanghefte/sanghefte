@@ -5,6 +5,8 @@ import "./Song.css";
 import {getAllSongs, Song, createSanghefte, deleteSanghefte} from "./util/firestoreFunctions";
 import {ChakraProvider} from "@chakra-ui/react";
 import {NewSong} from "./components/NewSong";
+import {LandingPage} from "./components/LandingPage";
+import {SangHefte} from "./components/SangHefte";
 
 function App() {
     const [data, setData] = useState<Array<Song>>([]);
@@ -20,9 +22,20 @@ function App() {
         await getAllSongs().then(r => setData(r));
     }
 
+    const [input, setInput] = useState("")
+
+    const updateInput = () => {
+        setInput("noe")
+    }
+
+    useEffect(() =>{
+        console.log(input)
+    }, [input])
+
     return (
         <ChakraProvider>
-            <NewSong />
+            {input == "" ? <LandingPage func={updateInput}/> : <NewSong />}
+
         </ChakraProvider>
   );
 }

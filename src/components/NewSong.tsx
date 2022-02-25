@@ -18,7 +18,7 @@ export const NewSong = () => {
             duration: 3000,
             isClosable: true,
         });
-        createSong("test", title, text, artist, "fintakt")
+        //createSong(sanghefte, title, text, artist, "fintakt")
     }
 
     return(
