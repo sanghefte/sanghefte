@@ -1,7 +1,8 @@
-import React, {useState} from "react";
-import { Link, Flex, Box, Input, Container, VStack, Button, useColorModeValue } from "@chakra-ui/react";
-import { Header } from "./Header";
+import React from "react";
+import { Flex, Box, Input, Container, VStack, Button, useColorModeValue } from "@chakra-ui/react";
 import {createSanghefte} from "../util/firestoreFunctions";
+import {useRecoilState} from "recoil";
+import {sanghefteState} from "../store/store";
 
 interface Props {
     func: () => void;
@@ -9,7 +10,7 @@ interface Props {
 
 export const LandingPage = ({func}: Props) => {
     const bgcolor = useColorModeValue("white", "whiteAlpha.50");
-    const [userWord, setUserWord] = useState("")
+    const [userWord, setUserWord] = useRecoilState(sanghefteState)
 
     const handleButton = () => {
         func()

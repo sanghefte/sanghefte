@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="559a8a0f-f764-4f82-b6f3-a8439ac01de2" name="Changes" comment="ADD: mulighet for å opprette sang fra frontend siden">
+    <list default="true" id="559a8a0f-f764-4f82-b6f3-a8439ac01de2" name="Changes" comment="UPDATE: Sangene legges inn i riktig hefte">
+      <change afterPath="$PROJECT_DIR$/src/store/store.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/LandingPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LandingPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/NewSong.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NewSong.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/util/firestoreFunctions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/firestoreFunctions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -72,7 +81,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1645703549104</updated>
-      <workItem from="1645703551472" duration="7417000" />
+      <workItem from="1645703551472" duration="9618000" />
     </task>
     <task id="LOCAL−00001" summary="ADD: mulighet for å opprette sang fra frontend siden">
       <created>1645705945697</created>
@@ -80,7 +89,13 @@
       <option name="presentableId" value="LOCAL−00001" />
       <updated>1645705945697</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL−00002" summary="ADD: mulighet til å opprette sanghefte for en bruker">
+      <created>1645780962685</created>
+      <option name="number" value="LOCAL−00002" />
+      <option name="presentableId" value="LOCAL−00002" />
+      <updated>1645780962685</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,6 +126,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ADD: mulighet for å opprette sang fra frontend siden" />
-    <option name="LAST_COMMIT_MESSAGE" value="ADD: mulighet for å opprette sang fra frontend siden" />
+    <MESSAGE value="ADD: mulighet til å opprette sanghefte for en bruker" />
+    <MESSAGE value="UPDATE: Sangene legges inn i riktig hefte" />
+    <option name="LAST_COMMIT_MESSAGE" value="UPDATE: Sangene legges inn i riktig hefte" />
   </component>
 </project>

@@ -1,14 +1,15 @@
 import React, {useState} from "react";
-import { useToast, Link, Flex, Box, Input, Container, VStack, Button, useColorModeValue, Heading, Textarea, Divider } from "@chakra-ui/react";
-import { Header } from "./Header";
-import React_2 from "framer-motion/dist/framer-motion";
+import { useToast, Flex, Input, Container, VStack, Button, Heading, Textarea, Divider } from "@chakra-ui/react";
 import {createSong} from "../util/firestoreFunctions";
+import {useRecoilValue} from "recoil";
+import { sanghefteState } from "../store/store";
 
 export const NewSong = () => {
     const toast = useToast() //ChakraUI funksjon for å få en bekreftelses-toast https://chakra-ui.com/docs/feedback/toast
     const [title, setTitle] = useState("")
     const [text, setText] = useState("")
     const [artist, setArtist] = useState("")
+    const sanghefte = useRecoilValue(sanghefteState)
 
     const handleClick = () => {
         toast({
@@ -18,7 +19,7 @@ export const NewSong = () => {
             duration: 3000,
             isClosable: true,
         });
-        //createSong(sanghefte, title, text, artist, "fintakt")
+        createSong(sanghefte, title, text, artist, "fintakt")
     }
 
     return(
