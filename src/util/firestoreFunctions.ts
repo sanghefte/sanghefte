@@ -10,21 +10,23 @@ import { db } from "./firebase-config";
 
 export type Song = {
   id: string;
-  Name: string;
-  lyrics: string;
+  title: string;
+  text: string;
+  creator: string;
 };
 
-const dataCollectionRef = collection(db, "songs");
 
-export const getAllSongs = async (): Promise<Array<Song>> => {
+export const getAllSongs = async (SanghefteId: string): Promise<Array<Song>> => {
+  const dataCollectionRef = collection(db, "sanghefter", SanghefteId, "sanger");
   const snapshot = await getDocs(dataCollectionRef);
 
   const data: Array<Song> = [];
 
   snapshot.docs.map((_data) => {
     data.push({
-      Name: _data.data().Name,
-      lyrics: _data.data().lyrics,
+      title: _data.data().title,
+      text: _data.data().text,
+      creator: _data.data().creator,
       id: _data.id,
     });
   });
@@ -72,7 +74,7 @@ export const createSong = async (
   setDoc(docRef, {
     title: songTitle,
     text: text,
-    creatot: creator,
+    creator: creator,
     melody: melody,
   });
 };
