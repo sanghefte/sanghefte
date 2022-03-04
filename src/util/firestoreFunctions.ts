@@ -52,9 +52,7 @@ export const getAllSongs = async (
 export const createSanghefte = async (docName: string) => {
   const docRef = doc(db, "sanghefter", docName);
   const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
-    console.log("JA DEN FINNES");
-  } else {
+  if (!docSnap.exists()) {
     await setDoc(doc(db, "sanghefter", docName), {});
   }
 };
@@ -68,8 +66,6 @@ export const deleteSanghefte = async (docName: string) => {
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
     await deleteDoc(docRef);
-  } else {
-    console.log("Sangheftet finnes ikke!");
   }
 };
 
