@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
 import "./Song.css";
@@ -19,9 +19,6 @@ function App() {
     setInput("noe2");
   };
 
-  useEffect(() => {
-    console.log(input);
-  }, [input]);
 
   return (
     <ChakraProvider>
