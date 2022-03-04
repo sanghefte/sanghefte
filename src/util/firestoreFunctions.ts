@@ -25,7 +25,9 @@ export type Song = {
  * @return {Array} Returns all songs in a song pamphlet.
  */
 
-export const getAllSongs = async (SanghefteId: string): Promise<Array<Song>> => {
+export const getAllSongs = async (
+  SanghefteId: string
+): Promise<Array<Song>> => {
   const dataCollectionRef = collection(db, "sanghefter", SanghefteId, "sanger");
   const snapshot = await getDocs(dataCollectionRef);
 
@@ -83,7 +85,7 @@ export const createSong = async (
   pathSegment: string,
   songTitle: string,
   text: string,
-  creator: string,
+  creator: string
 ) => {
   const docRef = doc(db, "sanghefter", pathSegment, "sanger", songTitle);
   setDoc(docRef, {
