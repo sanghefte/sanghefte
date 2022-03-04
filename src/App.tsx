@@ -19,7 +19,6 @@ function App() {
     setInput("noe2");
   };
 
-
   return (
     <ChakraProvider>
       <RecoilRoot>
