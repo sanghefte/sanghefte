@@ -6,10 +6,9 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { NewSong } from "./components/NewSong";
 import { LandingPage } from "./components/LandingPage";
 import { RecoilRoot } from "recoil";
-import {SongContainer} from "./components/SongContainer";
+import { SongContainer } from "./components/SongContainer";
 
 function App() {
-
   const [input, setInput] = useState("");
 
   const updateInput = () => {
@@ -17,9 +16,8 @@ function App() {
   };
 
   const updateInput2 = () => {
-    setInput("noe2")
+    setInput("noe2");
   };
-
 
   useEffect(() => {
     console.log(input);
@@ -28,7 +26,13 @@ function App() {
   return (
     <ChakraProvider>
       <RecoilRoot>
-        {input == "" ? <LandingPage func={updateInput} func2={updateInput2}/>:  input =="noe" ? <NewSong />: <SongContainer/>}
+        {input == "" ? (
+          <LandingPage func={updateInput} func2={updateInput2} />
+        ) : input == "noe" ? (
+          <NewSong />
+        ) : (
+          <SongContainer />
+        )}
       </RecoilRoot>
     </ChakraProvider>
   );
