@@ -8,9 +8,9 @@ import {
   Button,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { createSanghefte } from "../util/firestoreFunctions";
+import { createSanghefte, generateUser } from "../util/firestoreFunctions";
 import { useRecoilState } from "recoil";
-import { sanghefteState } from "../store/store";
+import { sanghefteState, userState } from "../store/store";
 
 interface Props {
   func: () => void;
@@ -20,10 +20,17 @@ interface Props {
 export const LandingPage = ({ func, func2 }: Props) => {
   const bgcolor = useColorModeValue("white", "whiteAlpha.50");
   const [userWord, setUserWord] = useRecoilState(sanghefteState);
+  const [userID, setUserID] = useRecoilState(userState);
 
   const handleButton = () => {
     func();
-    createSanghefte(userWord);
+    createSanghefte(userWord, userID);
+  };
+
+  const makeUser = () => {
+    const uniqueID = "id" + new Date().getTime();
+    setUserID(uniqueID);
+    generateUser(userID);
   };
 
   const handleButton2 = () => {
@@ -55,6 +62,16 @@ export const LandingPage = ({ func, func2 }: Props) => {
                 //variant="outline"
               >
                 Create Sanghefte
+              </Button>
+            </Box>
+            <Box p={5} borderRadius="lg" shadow="md" bg={bgcolor}>
+              <Button
+                isFullWidth
+                mt={3}
+                onClick={makeUser}
+                //variant="outline"
+              >
+                Generate user
               </Button>
             </Box>
             <Box p={5} borderRadius="lg" shadow="md" bg={bgcolor}>
