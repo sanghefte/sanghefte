@@ -7,9 +7,13 @@ import {
   VStack,
   Button,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
-import { createSanghefte } from "../util/firestoreFunctions";
-import { useRecoilState } from "recoil";
+import {
+  checkIfPamphletExist,
+  createSanghefte,
+} from "../util/firestoreFunctions";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { sanghefteState } from "../store/store";
 
 interface Props {
@@ -20,14 +24,27 @@ interface Props {
 export const LandingPage = ({ func, func2 }: Props) => {
   const bgcolor = useColorModeValue("white", "whiteAlpha.50");
   const [userWord, setUserWord] = useRecoilState(sanghefteState);
+  const toast = useToast(); //ChakraUI funksjon for å få en bekreftelses-toast https://chakra-ui.com/docs/feedback/toast
+  const sanghefteId = useRecoilValue(sanghefteState);
 
   const handleButton = () => {
     func();
     createSanghefte(userWord);
   };
 
-  const handleButton2 = () => {
-    func2();
+  const handleButton2 = async () => {
+    if (await checkIfPamphletExist(sanghefteId)) {
+      func2();
+      console.log("Success! vi fant sanghefte", sanghefteId);
+    } else {
+      toast({
+        title: "Fant ikke sanghefte med id: " + sanghefteId,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      console.log("fant ikke hefte med sanghefteID: ", sanghefteId);
+    }
   };
   return (
     <Box>
