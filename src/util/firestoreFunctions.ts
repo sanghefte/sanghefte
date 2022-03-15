@@ -1,10 +1,10 @@
 import {
   collection,
   deleteDoc,
+  doc,
   getDoc,
   getDocs,
   setDoc,
-  doc,
 } from "firebase/firestore";
 import { db } from "./firebase-config";
 
@@ -31,17 +31,12 @@ export const getAllSongs = async (
   const dataCollectionRef = collection(db, "sanghefter", SanghefteId, "sanger");
   const querySnapshot = await getDocs(dataCollectionRef);
 
-  const data: Array<Song> = [];
-
-  querySnapshot.docs.map((_data) => {
-    data.push({
-      title: _data.data().title,
-      text: _data.data().text,
-      creator: _data.data().creator,
-      id: _data.id,
-    });
-  });
-  return data as Array<Song>;
+  return querySnapshot.docs.map((_data) => ({
+    title: _data.data().title,
+    text: _data.data().text,
+    creator: _data.data().creator,
+    id: _data.id,
+  }));
 };
 
 /**
