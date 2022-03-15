@@ -29,11 +29,11 @@ export const getAllSongs = async (
   SanghefteId: string
 ): Promise<Array<Song>> => {
   const dataCollectionRef = collection(db, "sanghefter", SanghefteId, "sanger");
-  const snapshot = await getDocs(dataCollectionRef);
+  const querySnapshot = await getDocs(dataCollectionRef);
 
   const data: Array<Song> = [];
 
-  snapshot.docs.map((_data) => {
+  querySnapshot.docs.map((_data) => {
     data.push({
       title: _data.data().title,
       text: _data.data().text,
@@ -41,8 +41,18 @@ export const getAllSongs = async (
       id: _data.id,
     });
   });
-
   return data as Array<Song>;
+};
+
+/**
+ * Checks if provided pamphlet id already exists
+ * @return {Boolean} Returns all songs in a song pamphlet.
+ * @param SanghefteId
+ */
+export const checkIfPamphletExist = async (SanghefteId: string) => {
+  const dataCollectionRef = collection(db, "sanghefter", SanghefteId, "sanger");
+  const snapshot = await getDocs(dataCollectionRef);
+  return !snapshot.empty;
 };
 
 /**

@@ -10,7 +10,6 @@ import { SongContainer } from "./components/SongContainer";
 
 function App() {
   const [input, setInput] = useState("");
-
   const updateInput = () => {
     setInput("noe");
   };
@@ -22,9 +21,9 @@ function App() {
   return (
     <ChakraProvider>
       <RecoilRoot>
-        {input == "" ? (
+        {input === "" ? (
           <LandingPage func={updateInput} func2={updateInput2} />
-        ) : input == "noe" ? (
+        ) : input === "noe" ? (
           <NewSong />
         ) : (
           <SongContainer />
