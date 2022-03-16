@@ -44,6 +44,7 @@ export const LandingPage = ({ func, func2 }: Props) => {
         isClosable: true,
       });
       console.log("fant ikke hefte med sanghefteID: ", sanghefteId);
+
     }
   };
   return (
