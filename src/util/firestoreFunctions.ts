@@ -1,10 +1,10 @@
 import {
   collection,
   deleteDoc,
+  doc,
   getDoc,
   getDocs,
   setDoc,
-  doc,
 } from "firebase/firestore";
 import { db } from "./firebase-config";
 
@@ -29,20 +29,25 @@ export const getAllSongs = async (
   SanghefteId: string
 ): Promise<Array<Song>> => {
   const dataCollectionRef = collection(db, "sanghefter", SanghefteId, "sanger");
+  const querySnapshot = await getDocs(dataCollectionRef);
+
+  return querySnapshot.docs.map((_data) => ({
+    title: _data.data().title,
+    text: _data.data().text,
+    creator: _data.data().creator,
+    id: _data.id,
+  }));
+};
+
+/**
+ * Checks if provided pamphlet id already exists
+ * @return {Boolean} Returns all songs in a song pamphlet.
+ * @param SanghefteId
+ */
+export const checkIfPamphletExist = async (SanghefteId: string) => {
+  const dataCollectionRef = collection(db, "sanghefter", SanghefteId, "sanger");
   const snapshot = await getDocs(dataCollectionRef);
-
-  const data: Array<Song> = [];
-
-  snapshot.docs.map((_data) => {
-    data.push({
-      title: _data.data().title,
-      text: _data.data().text,
-      creator: _data.data().creator,
-      id: _data.id,
-    });
-  });
-
-  return data as Array<Song>;
+  return !snapshot.empty;
 };
 
 /**

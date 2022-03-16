@@ -7,10 +7,14 @@ import {
   VStack,
   Button,
   useColorModeValue,
+  useToast,
 } from "@chakra-ui/react";
-import { createSanghefte, generateUser } from "../util/firestoreFunctions";
-import { useRecoilState } from "recoil";
-import { sanghefteState, userState } from "../store/store";
+import {
+  checkIfPamphletExist,
+  createSanghefte,
+} from "../util/firestoreFunctions";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { sanghefteState } from "../store/store";
 
 interface Props {
   func: () => void;
@@ -20,21 +24,27 @@ interface Props {
 export const LandingPage = ({ func, func2 }: Props) => {
   const bgcolor = useColorModeValue("white", "whiteAlpha.50");
   const [userWord, setUserWord] = useRecoilState(sanghefteState);
-  const [userID, setUserID] = useRecoilState(userState);
+  const toast = useToast(); //ChakraUI funksjon for å få en bekreftelses-toast https://chakra-ui.com/docs/feedback/toast
+  const sanghefteId = useRecoilValue(sanghefteState);
 
   const handleButton = () => {
     func();
-    createSanghefte(userWord, userID);
+    createSanghefte(userWord, "testUser");
   };
 
-  const makeUser = () => {
-    const uniqueID = "id" + new Date().getTime();
-    setUserID(uniqueID);
-    generateUser(userID);
-  };
-
-  const handleButton2 = () => {
-    func2();
+  const handleButton2 = async () => {
+    if (await checkIfPamphletExist(sanghefteId)) {
+      func2();
+      console.log("Success! vi fant sanghefte", sanghefteId);
+    } else {
+      toast({
+        title: "Fant ikke sanghefte med id: " + sanghefteId,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      console.log("fant ikke hefte med sanghefteID: ", sanghefteId);
+    }
   };
   return (
     <Box>
@@ -62,16 +72,6 @@ export const LandingPage = ({ func, func2 }: Props) => {
                 //variant="outline"
               >
                 Create Sanghefte
-              </Button>
-            </Box>
-            <Box p={5} borderRadius="lg" shadow="md" bg={bgcolor}>
-              <Button
-                isFullWidth
-                mt={3}
-                onClick={makeUser}
-                //variant="outline"
-              >
-                Generate user
               </Button>
             </Box>
             <Box p={5} borderRadius="lg" shadow="md" bg={bgcolor}>

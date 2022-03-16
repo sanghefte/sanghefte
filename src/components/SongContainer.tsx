@@ -9,13 +9,12 @@ export const SongContainer = () => {
   const sanghefteId = useRecoilValue(sanghefteState);
 
   useEffect(() => {
+    const fetchSongs = async () => {
+      setData([]);
+      await getAllSongs(sanghefteId).then((r) => setData(r));
+    };
     fetchSongs();
-  }, []);
-
-  const fetchSongs = async () => {
-    setData([]);
-    await getAllSongs(sanghefteId).then((r) => setData(r));
-  };
+  }, [sanghefteId, setData]);
 
   return (
     <Container mt={3}>
