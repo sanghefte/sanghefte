@@ -3,6 +3,7 @@ import { Container, Text, Heading } from "@chakra-ui/react";
 import { getAllSongs, Song } from "../util/firestoreFunctions";
 import { useRecoilValue } from "recoil";
 import { sanghefteState } from "../store/store";
+import { Carousel } from "react-responsive-carousel";
 
 export const SongContainer = () => {
   const [data, setData] = useState<Array<Song>>([]);
@@ -22,11 +23,14 @@ export const SongContainer = () => {
       {data &&
         data.map((d, index) => {
           return (
-            <div key={index}>
-              <Heading>{d.title}</Heading>
-              <Text as="i">Av: {d.creator}</Text>
-              <Text mt={3}>{d.text}</Text>
-            </div>
+            <Carousel showThumbs={false}>
+              <div key={index}>
+                <Heading>{d.title}</Heading>
+                <Text as="i">Av: {d.creator}</Text>
+                <Text mt={3}>{d.text}</Text>
+              </div>
+              <div />
+            </Carousel>
           );
         })}
     </Container>
