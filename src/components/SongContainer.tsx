@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Text, Heading, Button, IconButton } from "@chakra-ui/react";
+import { Container, Text, Heading} from "@chakra-ui/react";
 import { getAllSongs, Song } from "../util/firestoreFunctions";
 import { useRecoilValue } from "recoil";
 import { sanghefteState } from "../store/store";
@@ -13,13 +13,12 @@ export const SongContainer = () => {
   const sanghefteId = useRecoilValue(sanghefteState);
 
   useEffect(() => {
+    const fetchSongs = async () => {
+      setData([]);
+      await getAllSongs(sanghefteId).then((r) => setData(r));
+    };
     fetchSongs();
-  }, []);
-
-  const fetchSongs = async () => {
-    setData([]);
-    await getAllSongs(sanghefteId).then((r) => setData(r));
-  };
+  }, [sanghefteId, setData]);
 
   return (
     <div className="carousel-wrapper">
