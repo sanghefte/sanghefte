@@ -35,6 +35,7 @@ export const LandingPage = () => {
   const handleButton2 = async () => {
     if (await checkIfPamphletExist(sanghefteId)) {
       console.log("Success! vi fant sanghefte", sanghefteId);
+      navigate("/sing")
     } else {
       toast({
         title: "Fant ikke sanghefte med id: " + sanghefteId,
