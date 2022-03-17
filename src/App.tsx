@@ -26,7 +26,7 @@ function App() {
                   <Route path="/newsong" element={<NewSong />}>
 
                   </Route>
-                  <Route path="/les" element={<SongContainer />}>
+                  <Route path="/sing" element={<SongContainer />}>
 
                   </Route>
 
