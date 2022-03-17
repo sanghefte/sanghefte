@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { createSong } from "../util/firestoreFunctions";
 import { useRecoilValue } from "recoil";
-import { sanghefteState, userState } from "../store/store";
+import { sanghefteState } from "../store/store";
 
 export const NewSong = () => {
   const toast = useToast(); //ChakraUI funksjon for å få en bekreftelses-toast https://chakra-ui.com/docs/feedback/toast
@@ -20,7 +20,8 @@ export const NewSong = () => {
   const [text, setText] = useState("");
   const [artist, setArtist] = useState("");
   const sanghefte = useRecoilValue(sanghefteState);
-  const userID = useRecoilValue(userState);
+
+  const localStorageKey = "userID"
 
   const handleClick = () => {
     toast({
@@ -30,7 +31,12 @@ export const NewSong = () => {
       duration: 3000,
       isClosable: true,
     });
-    createSong(userID, sanghefte, title, text, artist);
+
+    const userID = localStorage.getItem(localStorageKey)
+
+    if (userID !== null) {
+      createSong(userID, sanghefte, title, text, artist).catch(console.error);
+    }
   };
 
   return (
