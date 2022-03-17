@@ -5,6 +5,7 @@ import {
   getDoc,
   getDocs,
   setDoc,
+  addDoc,
 } from "firebase/firestore";
 import { db } from "./firebase-config";
 
@@ -43,9 +44,10 @@ export const getAllSongs = async (
  * Checks if provided pamphlet id already exists
  * @return {Boolean} Returns all songs in a song pamphlet.
  * @param SanghefteId
+ * @param docRef
  */
-export const checkIfPamphletExist = async (SanghefteId: string) => {
-  const dataCollectionRef = collection(db, "sanghefter", SanghefteId, "sanger");
+export const checkIfPamphletExist = async (SanghefteId: string, docRef: string) => {
+  const dataCollectionRef = collection(db, docRef, SanghefteId, "sanger");
   const snapshot = await getDocs(dataCollectionRef);
   return !snapshot.empty;
 };
@@ -65,11 +67,10 @@ export const createSanghefte = async (docName: string, userID: string) => {
 
 /**
  * Generates a user
- * @param uniqueID The random id for the user
  */
-export const generateUser = async (uniqueID: string) => {
-  const docRef = doc(db, "BrukerID", uniqueID);
-  await setDoc(docRef, {});
+export const generateUser = async () => {
+  const docRef = await addDoc(collection(db, "BrukerID"), {});
+  localStorage.setItem("userID", docRef.id)
 };
 
 /**
@@ -141,3 +142,5 @@ export const deleteSong = async (
   deleteDoc(docRef);
   console.log("Deleted " + songTitle);
 };
+
+
