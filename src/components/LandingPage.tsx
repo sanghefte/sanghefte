@@ -15,9 +15,7 @@ import {
 } from "../util/firestoreFunctions";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { sanghefteState } from "../store/store";
-import { useNavigate } from 'react-router-dom';
-
-
+import { useNavigate } from "react-router-dom";
 
 export const LandingPage = () => {
   const bgcolor = useColorModeValue("white", "whiteAlpha.50");
@@ -26,16 +24,15 @@ export const LandingPage = () => {
   const sanghefteId = useRecoilValue(sanghefteState);
   const navigate = useNavigate();
 
-
   const handleButton = () => {
     createSanghefte(userWord);
-    navigate("/newsong")
+    navigate("/newsong");
   };
 
   const handleButton2 = async () => {
     if (await checkIfPamphletExist(sanghefteId)) {
       console.log("Success! vi fant sanghefte", sanghefteId);
-      navigate("/sing")
+      navigate("/sing");
     } else {
       toast({
         title: "Fant ikke sanghefte med id: " + sanghefteId,
