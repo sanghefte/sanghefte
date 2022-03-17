@@ -15,27 +15,24 @@ import {
 } from "../util/firestoreFunctions";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { sanghefteState } from "../store/store";
+import { useNavigate } from "react-router-dom";
 
-interface Props {
-  func: () => void;
-  func2: () => void;
-}
-
-export const LandingPage = ({ func, func2 }: Props) => {
+export const LandingPage = () => {
   const bgcolor = useColorModeValue("white", "whiteAlpha.50");
   const [userWord, setUserWord] = useRecoilState(sanghefteState);
   const toast = useToast(); //ChakraUI funksjon for å få en bekreftelses-toast https://chakra-ui.com/docs/feedback/toast
   const sanghefteId = useRecoilValue(sanghefteState);
+  const navigate = useNavigate();
 
   const handleButton = () => {
-    func();
     createSanghefte(userWord);
+    navigate("/newsong");
   };
 
   const handleButton2 = async () => {
     if (await checkIfPamphletExist(sanghefteId)) {
-      func2();
       console.log("Success! vi fant sanghefte", sanghefteId);
+      navigate("/sing");
     } else {
       toast({
         title: "Fant ikke sanghefte med id: " + sanghefteId,
@@ -69,6 +66,7 @@ export const LandingPage = ({ func, func2 }: Props) => {
                 isFullWidth
                 mt={3}
                 onClick={handleButton}
+
                 //variant="outline"
               >
                 Create Sanghefte
