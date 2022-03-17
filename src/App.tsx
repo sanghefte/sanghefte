@@ -15,9 +15,9 @@ function App() {
       <RecoilRoot>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<LandingPage/>}/>
-            <Route path="/newsong" element={<NewSong/>}/>
-            <Route path="/sing" element={<SongContainer/>}/>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/newsong" element={<NewSong />} />
+            <Route path="/sing" element={<SongContainer />} />
           </Routes>
         </BrowserRouter>
         ,
