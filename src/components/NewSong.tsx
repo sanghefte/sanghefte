@@ -21,6 +21,8 @@ export const NewSong = () => {
   const [artist, setArtist] = useState("");
   const sanghefte = useRecoilValue(sanghefteState);
 
+  const localStorageKey = "userID";
+
   const handleClick = () => {
     toast({
       title: "Sang lagt til.",
@@ -29,7 +31,12 @@ export const NewSong = () => {
       duration: 3000,
       isClosable: true,
     });
-    createSong(sanghefte, title, text, artist);
+
+    const userID = localStorage.getItem(localStorageKey);
+
+    if (userID !== null) {
+      createSong(userID, sanghefte, title, text, artist).catch(console.error);
+    }
   };
 
   return (
