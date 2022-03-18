@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+
+/*Skal vi legge dette i et eget CSS dokument?*/
+
+.carousel.carousel-slider .control-arrow {
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.2);
+  margin-bottom: 0;
+}
+
+.carousel.carousel-slider .control-arrow:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 650px) {
+  .carousel.carousel-slider .control-arrow {
+    display: none;
+  }
+}
