@@ -16,24 +16,21 @@ import {
 } from "../util/firestoreFunctions";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { sanghefteState } from "../store/store";
+import { useNavigate } from "react-router-dom";
 
-interface Props {
-  func: () => void;
-  func2: () => void;
-}
-
-export const LandingPage = ({ func, func2 }: Props) => {
+export const LandingPage = () => {
   const bgcolor = useColorModeValue("white", "whiteAlpha.50");
   const [userWord, setUserWord] = useRecoilState(sanghefteState);
   const toast = useToast(); //ChakraUI funksjon for å få en bekreftelses-toast https://chakra-ui.com/docs/feedback/toast
   const sanghefteId = useRecoilValue(sanghefteState);
+  const navigate = useNavigate();
 
   /* Local storage */
   const localStorageKey = "userID"
 
   const handleButton = async () => {
 
-    func();
+
 
     /* Sjekke om localstorage allerede har en brukerID */
     if (!localStorage.getItem(localStorageKey)) {
@@ -46,12 +43,14 @@ export const LandingPage = ({ func, func2 }: Props) => {
       await createSanghefte(userWord, userID).catch(console.error)
     }
 
+    navigate("/newsong");
+
   };
 
   const handleButton2 = async () => {
     if (await checkIfPamphletExist(sanghefteId, "sanghefter")) {
-      func2();
       console.log("Success! vi fant sanghefte", sanghefteId);
+      navigate("/sing");
     } else {
       toast({
         title: "Fant ikke sanghefte med id: " + sanghefteId,
@@ -60,7 +59,6 @@ export const LandingPage = ({ func, func2 }: Props) => {
         isClosable: true,
       });
       console.log("fant ikke hefte med sanghefteID: ", sanghefteId);
-
     }
   };
   return (
