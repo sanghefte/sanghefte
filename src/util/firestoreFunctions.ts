@@ -46,7 +46,10 @@ export const getAllSongs = async (
  * @param SanghefteId
  * @param docRef
  */
-export const checkIfPamphletExist = async (SanghefteId: string, docRef: string) => {
+export const checkIfPamphletExist = async (
+  SanghefteId: string,
+  docRef: string
+) => {
   const dataCollectionRef = collection(db, docRef, SanghefteId, "sanger");
   const snapshot = await getDocs(dataCollectionRef);
   return !snapshot.empty;
@@ -70,7 +73,7 @@ export const createSanghefte = async (docName: string, userID: string) => {
  */
 export const generateUser = async () => {
   const docRef = await addDoc(collection(db, "BrukerID"), {});
-  localStorage.setItem("userID", docRef.id)
+  localStorage.setItem("userID", docRef.id);
 };
 
 /**
@@ -142,5 +145,3 @@ export const deleteSong = async (
   deleteDoc(docRef);
   console.log("Deleted " + songTitle);
 };
-
-

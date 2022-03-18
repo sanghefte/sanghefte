@@ -12,7 +12,7 @@ import {
 import {
   checkIfPamphletExist,
   createSanghefte,
-  generateUser
+  generateUser,
 } from "../util/firestoreFunctions";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { sanghefteState } from "../store/store";
@@ -26,25 +26,21 @@ export const LandingPage = () => {
   const navigate = useNavigate();
 
   /* Local storage */
-  const localStorageKey = "userID"
+  const localStorageKey = "userID";
 
   const handleButton = async () => {
-
-
-
     /* Sjekke om localstorage allerede har en brukerID */
     if (!localStorage.getItem(localStorageKey)) {
-      await generateUser().catch(console.error)
+      await generateUser().catch(console.error);
     }
 
-    const userID = localStorage.getItem(localStorageKey)
+    const userID = localStorage.getItem(localStorageKey);
 
     if (userID !== null) {
-      await createSanghefte(userWord, userID).catch(console.error)
+      await createSanghefte(userWord, userID).catch(console.error);
     }
 
     navigate("/newsong");
-
   };
 
   const handleButton2 = async () => {
