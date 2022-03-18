@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "./App.css";
 import "./Song.css";
@@ -7,27 +7,20 @@ import { NewSong } from "./components/NewSong";
 import { LandingPage } from "./components/LandingPage";
 import { RecoilRoot } from "recoil";
 import { SongContainer } from "./components/SongContainer";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [input, setInput] = useState("");
-  const updateInput = () => {
-    setInput("noe");
-  };
-
-  const updateInput2 = () => {
-    setInput("noe2");
-  };
-
   return (
     <ChakraProvider>
       <RecoilRoot>
-        {input === "" ? (
-          <LandingPage func={updateInput} func2={updateInput2} />
-        ) : input === "noe" ? (
-          <NewSong />
-        ) : (
-          <SongContainer />
-        )}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/newsong" element={<NewSong />} />
+            <Route path="/sing" element={<SongContainer />} />
+          </Routes>
+        </BrowserRouter>
+        ,
       </RecoilRoot>
     </ChakraProvider>
   );
