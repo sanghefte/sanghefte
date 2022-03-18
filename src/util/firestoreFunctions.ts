@@ -5,6 +5,7 @@ import {
   getDoc,
   getDocs,
   setDoc,
+  addDoc,
 } from "firebase/firestore";
 import { db } from "./firebase-config";
 
@@ -43,9 +44,13 @@ export const getAllSongs = async (
  * Checks if provided pamphlet id already exists
  * @return {Boolean} Returns all songs in a song pamphlet.
  * @param SanghefteId
+ * @param docRef
  */
-export const checkIfPamphletExist = async (SanghefteId: string) => {
-  const dataCollectionRef = collection(db, "sanghefter", SanghefteId, "sanger");
+export const checkIfPamphletExist = async (
+  SanghefteId: string,
+  docRef: string
+) => {
+  const dataCollectionRef = collection(db, docRef, SanghefteId, "sanger");
   const snapshot = await getDocs(dataCollectionRef);
   return !snapshot.empty;
 };
@@ -53,21 +58,31 @@ export const checkIfPamphletExist = async (SanghefteId: string) => {
 /**
  * Creates a new song pamphlet with a given id
  * @param docName id/name of the song pamphlet
+ * @param userID ID of the user
  */
-export const createSanghefte = async (docName: string) => {
-  const docRef = doc(db, "sanghefter", docName);
+export const createSanghefte = async (docName: string, userID: string) => {
+  const docRef = doc(db, "BrukerID", userID, "sanghefter", docName);
   const docSnap = await getDoc(docRef);
   if (!docSnap.exists()) {
-    await setDoc(doc(db, "sanghefter", docName), {});
+    await setDoc(doc(db, "BrukerID", userID, "sanghefter", docName), {});
   }
 };
 
 /**
+ * Generates a user
+ */
+export const generateUser = async () => {
+  const docRef = await addDoc(collection(db, "BrukerID"), {});
+  localStorage.setItem("userID", docRef.id);
+};
+
+/**
  * Deletes a song pamphlet if it exists
+ * @param userID Id of the user
  * @param docName id/name of the song pamphlet
  */
-export const deleteSanghefte = async (docName: string) => {
-  const docRef = doc(db, "sanghefter", docName);
+export const deleteSanghefte = async (userID: string, docName: string) => {
+  const docRef = doc(db, "BrukerID", userID, "sanghefter", docName);
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
     await deleteDoc(docRef);
@@ -77,18 +92,28 @@ export const deleteSanghefte = async (docName: string) => {
 /**
  * Creates a new song and add it to a specific song pamphlet
  *
+ * @param userID the id of the user
  * @param pathSegment which song pamphlet we will add a song to
  * @param songTitle Title of the song we want to add
  * @param text Lyrics we want to add
  * @param creator Creator of the song
  */
 export const createSong = async (
+  userID: string,
   pathSegment: string,
   songTitle: string,
   text: string,
   creator: string
 ) => {
-  const docRef = doc(db, "sanghefter", pathSegment, "sanger", songTitle);
+  const docRef = doc(
+    db,
+    "BrukerID",
+    userID,
+    "sanghefter",
+    pathSegment,
+    "sanger",
+    songTitle
+  );
   setDoc(docRef, {
     title: songTitle,
     text: text,
@@ -99,11 +124,24 @@ export const createSong = async (
 /**
  * Deletes a song from a song pamphlet
  *
+ * @param userID Id of the user
  * @param pathSegment Song pamphlet to delete from
  * @param songTitle Title of the song we want to delete
  */
-export const deleteSong = async (pathSegment: string, songTitle: string) => {
-  const docRef = doc(db, "sanghefter", pathSegment, "sanger", songTitle);
+export const deleteSong = async (
+  userID: string,
+  pathSegment: string,
+  songTitle: string
+) => {
+  const docRef = doc(
+    db,
+    "BrukerID",
+    userID,
+    "sanghefter",
+    pathSegment,
+    "sanger",
+    songTitle
+  );
   deleteDoc(docRef);
   console.log("Deleted " + songTitle);
 };
