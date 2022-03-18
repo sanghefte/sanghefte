@@ -7,8 +7,3 @@ export const sanghefteState = atom({
   key: "sanghefteState",
   default: "test",
 });
-
-export const userState = atom({
-  key: "userState",
-  default: "",
-});
