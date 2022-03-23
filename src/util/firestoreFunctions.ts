@@ -23,13 +23,15 @@ export type Song = {
  * Gets all songs in a son pamphlet.
  *
  * @param SanghefteId The Id of the song pamphlet.
+ * @param userID Id of the creator of the pamphlet.
  * @return {Array} Returns all songs in a song pamphlet.
  */
 
 export const getAllSongs = async (
-  SanghefteId: string
+  SanghefteId: string,
+  userID: string,
 ): Promise<Array<Song>> => {
-  const dataCollectionRef = collection(db, "sanghefter", SanghefteId, "sanger");
+  const dataCollectionRef = collection(db, "BrukerID", userID, "sanghefter", SanghefteId, "sanger");
   const querySnapshot = await getDocs(dataCollectionRef);
 
   return querySnapshot.docs.map((_data) => ({
