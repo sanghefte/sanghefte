@@ -17,7 +17,10 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/newsong" element={<NewSong />} />
-            <Route path="/sing/:userID/:pamphletName" element={<SongContainer />} />
+            <Route
+              path="/sing/:userID/:pamphletName"
+              element={<SongContainer />}
+            />
           </Routes>
         </BrowserRouter>
         ,

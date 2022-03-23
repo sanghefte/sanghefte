@@ -6,20 +6,19 @@ import { sanghefteState } from "../store/store";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../App.css";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 //import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
 
 export const SongContainer = () => {
   const [data, setData] = useState<Array<Song>>([]);
   const sanghefteId = useRecoilValue(sanghefteState);
-  const {userID, pamphletName} = useParams()
-
+  const { userID, pamphletName } = useParams();
 
   useEffect(() => {
     const fetchSongs = async () => {
       setData([]);
-      if(pamphletName && userID) {
-        await getAllSongs(pamphletName,userID).then((r) => setData(r));
+      if (pamphletName && userID) {
+        await getAllSongs(pamphletName, userID).then((r) => setData(r));
       }
     };
     fetchSongs();

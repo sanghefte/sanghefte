@@ -29,9 +29,16 @@ export type Song = {
 
 export const getAllSongs = async (
   SanghefteId: string,
-  userID: string,
+  userID: string
 ): Promise<Array<Song>> => {
-  const dataCollectionRef = collection(db, "BrukerID", userID, "sanghefter", SanghefteId, "sanger");
+  const dataCollectionRef = collection(
+    db,
+    "BrukerID",
+    userID,
+    "sanghefter",
+    SanghefteId,
+    "sanger"
+  );
   const querySnapshot = await getDocs(dataCollectionRef);
 
   return querySnapshot.docs.map((_data) => ({
