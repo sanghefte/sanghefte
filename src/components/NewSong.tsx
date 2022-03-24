@@ -13,6 +13,7 @@ import {
 import { createSong } from "../util/firestoreFunctions";
 import { useRecoilValue } from "recoil";
 import { sanghefteState } from "../store/store";
+import { useNavigate } from "react-router-dom";
 
 export const NewSong = () => {
   const toast = useToast(); //ChakraUI funksjon for å få en bekreftelses-toast https://chakra-ui.com/docs/feedback/toast
@@ -20,6 +21,7 @@ export const NewSong = () => {
   const [text, setText] = useState("");
   const [artist, setArtist] = useState("");
   const sanghefte = useRecoilValue(sanghefteState);
+  const navigate = useNavigate()
 
   const localStorageKey = "userID";
 
@@ -38,6 +40,17 @@ export const NewSong = () => {
       createSong(userID, sanghefte, title, text, artist).catch(console.error);
     }
   };
+
+  /**
+   * Takes the user to the hub if it exists
+   */
+  const handleCLick2 = () => {
+    const userID = localStorage.getItem(localStorageKey);
+
+    if (userID !== null) {
+      navigate("/")
+    }
+  }
 
   return (
     <Flex
@@ -73,7 +86,11 @@ export const NewSong = () => {
           <Button onClick={handleClick} isFullWidth colorScheme="teal">
             Legg til ny sang
           </Button>
-          <Button isFullWidth>Fullfør sanghefte</Button>
+          <Button
+            isFullWidth
+            onClick={handleCLick2}
+          >
+            Fullfør sanghefte</Button>
         </VStack>
       </Container>
     </Flex>

@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
 import {deleteSanghefte, getAllPamphlets, Pamphlet} from "../util/firestoreFunctions";
 import {Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Button} from "@chakra-ui/react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const PamphletMenu = () => {
     const [pamphlets, setPamphlets] = useState<Array<Pamphlet>>([]);
     const localStorageKey = "userID";
     const userID = localStorage.getItem(localStorageKey);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPamphlets = async () => {
@@ -19,11 +20,16 @@ export const PamphletMenu = () => {
 
     const deletePamphlet = async(pamphletID: string) => {
         if(userID)
-        deleteSanghefte(userID, pamphletID)
+        await deleteSanghefte(userID, pamphletID)
+    }
+
+    const handleButton = () => {
+        navigate("/pamphlet")
     }
 
     return (
         <>
+            <Button onClick={handleButton}>+</Button>
         <Accordion allowToggle>{pamphlets.map((pamphlet) =>
             <AccordionItem key={pamphlet.id}>
                 <h1>
