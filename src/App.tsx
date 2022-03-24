@@ -8,6 +8,7 @@ import { LandingPage } from "./components/LandingPage";
 import { RecoilRoot } from "recoil";
 import { SongContainer } from "./components/SongContainer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { NewPamphlet } from "./components/NewPamphlet";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/" element={<LandingPage/>} />
             <Route path="/newsong" element={<NewSong />} />
             <Route path="/sing" element={<SongContainer />} />
+            <Route path="/pamphlet" element={<NewPamphlet />} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>
