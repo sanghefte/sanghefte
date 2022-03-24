@@ -22,7 +22,7 @@ export const SongContainer = () => {
       }
     };
     fetchSongs();
-  }, [sanghefteId, setData]);
+  }, [pamphletName, sanghefteId, setData, userID]);
 
   return (
     <div className="carousel-wrapper">
