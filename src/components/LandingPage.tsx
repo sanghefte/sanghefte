@@ -12,7 +12,7 @@ import {
 import {
   checkIfPamphletExist,
   createSanghefte,
-  generateUser
+  generateUser,
 } from "../util/firestoreFunctions";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { sanghefteState } from "../store/store";
@@ -24,7 +24,6 @@ export const LandingPage = () => {
   const toast = useToast(); //ChakraUI funksjon for å få en bekreftelses-toast https://chakra-ui.com/docs/feedback/toast
   const sanghefteId = useRecoilValue(sanghefteState);
   const navigate = useNavigate();
-
 
   /* Local storage */
   const localStorage_userIdKey = "userID";
@@ -41,7 +40,7 @@ export const LandingPage = () => {
       await createSanghefte(userWord, userID).catch(console.error);
     }
 
-    setUserWord(userWord)
+    setUserWord(userWord);
 
     navigate("/newsong");
   };

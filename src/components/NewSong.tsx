@@ -22,7 +22,7 @@ export const NewSong = () => {
   const sanghefte = useRecoilValue(sanghefteState);
 
   const localStorage_userIdKey = "userID";
-  const localStorage_userReferenceKey = "userReference"
+  const localStorage_userReferenceKey = "userReference";
 
   const handleClick = () => {
     toast({
@@ -41,12 +41,12 @@ export const NewSong = () => {
   };
 
   const share = () => {
-    const userReference = localStorage.getItem(localStorage_userReferenceKey)
+    const userReference = localStorage.getItem(localStorage_userReferenceKey);
 
     if (userReference !== null) {
       console.log("sanghefte.no/sing/" + userReference + "/" + sanghefte);
     }
-  }
+  };
 
   return (
     <Flex
@@ -83,7 +83,9 @@ export const NewSong = () => {
             Legg til ny sang
           </Button>
           <Button isFullWidth>Fullfør sanghefte</Button>
-          <Button onClick={share} isFullWidth>Share</Button>
+          <Button onClick={share} isFullWidth>
+            Share
+          </Button>
         </VStack>
       </Container>
     </Flex>
