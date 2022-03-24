@@ -17,6 +17,7 @@ import {
 import { useRecoilState, useRecoilValue } from "recoil";
 import { sanghefteState } from "../store/store";
 import { useNavigate } from "react-router-dom";
+import {PamphletMenu} from "./PamphletMenu";
 
 export const LandingPage = () => {
   const bgcolor = useColorModeValue("white", "whiteAlpha.50");
@@ -57,52 +58,56 @@ export const LandingPage = () => {
       console.log("fant ikke hefte med sanghefteID: ", sanghefteId);
     }
   };
+
+if(!localStorage.getItem(localStorageKey)) {
   return (
-    <Box>
-      <Flex
-        align="center"
-        justify={{ base: "center", md: "space-around", xl: "space-between" }}
-        direction={{ base: "column-reverse", md: "row" }}
-        wrap="nowrap"
-        minH="100vh"
-        px={8}
-        //bg="blue.800"
-      >
-        <Container>
-          <VStack>
-            <Box p={5} borderRadius="lg" shadow="md" bg={bgcolor}>
-              <Input
-                size="lg"
-                placeholder="Your Pin"
-                onChange={(e) => setUserWord(e.target.value)}
-              />
-              <Button
-                isFullWidth
-                mt={3}
-                onClick={handleButton}
-                //variant="outline"
-              >
-                Create Sanghefte
-              </Button>
-            </Box>
-            <Box p={5} borderRadius="lg" shadow="md" bg={bgcolor}>
-              <Input
-                size="lg"
-                placeholder="Enter pin"
-                onChange={(e) => setUserWord(e.target.value)}
-              />
-              <Button
-                isFullWidth
-                mt={3}
-                onClick={handleButton2}
-                //variant="outline"
-              >
-                Join
-              </Button>
-            </Box>
-          </VStack>
-        </Container>
-      </Flex>
-    </Box>
+      <Box>
+        <Flex
+            align="center"
+            justify={{ base: "center", md: "space-around", xl: "space-between" }}
+            direction={{ base: "column-reverse", md: "row" }}
+            wrap="nowrap"
+            minH="100vh"
+            px={8}
+            //bg="blue.800"
+        >
+          <Container>
+            <VStack>
+              <Box p={5} borderRadius="lg" shadow="md" bg={bgcolor}>
+                <Input
+                    size="lg"
+                    placeholder="Your Pin"
+                    onChange={(e) => setUserWord(e.target.value)}
+                />
+                <Button
+                    isFullWidth
+                    mt={3}
+                    onClick={handleButton}
+                    //variant="outline"
+                >
+                  Create Sanghefte
+                </Button>
+              </Box>
+              <Box p={5} borderRadius="lg" shadow="md" bg={bgcolor}>
+                <Input
+                    size="lg"
+                    placeholder="Enter pin"
+                    onChange={(e) => setUserWord(e.target.value)}
+                />
+                <Button
+                    isFullWidth
+                    mt={3}
+                    onClick={handleButton2}
+                    //variant="outline"
+                >
+                  Join
+                </Button>
+              </Box>
+            </VStack>
+          </Container>
+        </Flex>
+      </Box>
   );
+} else return (<PamphletMenu />)
+
 };
