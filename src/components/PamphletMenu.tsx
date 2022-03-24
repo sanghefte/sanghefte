@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {getAllPamphlets, Pamphlet} from "../util/firestoreFunctions";
+import {deleteSanghefte, getAllPamphlets, Pamphlet} from "../util/firestoreFunctions";
 import {Accordion, AccordionButton, AccordionItem, AccordionPanel, Box, Button} from "@chakra-ui/react";
-
+import {useNavigate} from "react-router-dom";
 
 export const PamphletMenu = () => {
     const [pamphlets, setPamphlets] = useState<Array<Pamphlet>>([]);
@@ -17,6 +17,11 @@ export const PamphletMenu = () => {
         fetchPamphlets();
     }, [userID, setPamphlets]);
 
+    const deletePamphlet = async(pamphletID: string) => {
+        if(userID)
+        deleteSanghefte(userID, pamphletID)
+    }
+
     return (
         <>
         <Accordion allowToggle>{pamphlets.map((pamphlet) =>
@@ -29,13 +34,14 @@ export const PamphletMenu = () => {
                     </AccordionButton>
                 </h1>
                 <AccordionPanel>
-                    <Button>Delete</Button>
+                    <Button onClick={() => deletePamphlet(pamphlet.id)}>Delete</Button>
                     <Button>Update</Button>
                     <Button>Share</Button>
+                    <Button>Add song</Button>
+                    <h1 className={"link" + pamphlet.id}>noe</h1>
                 </AccordionPanel>
             </AccordionItem>)}
         </Accordion>
-
         </>
 
     )
