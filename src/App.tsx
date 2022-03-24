@@ -18,7 +18,7 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/newsong" element={<NewSong />} />
             <Route
-              path="/sing/:userID/:pamphletName"
+              path="/sing/:userReference/:pamphletName"
               element={<SongContainer />}
             />
           </Routes>

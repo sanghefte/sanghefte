@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container, Text, Heading } from "@chakra-ui/react";
-import { getAllSongs, Song } from "../util/firestoreFunctions";
-import { useRecoilValue } from "recoil";
-import { sanghefteState } from "../store/store";
+import { getAllSongs, getUserIdFromReference, Song } from "../util/firestoreFunctions";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import "../App.css";
@@ -11,22 +9,35 @@ import { useParams } from "react-router-dom";
 
 export const SongContainer = () => {
   const [data, setData] = useState<Array<Song>>([]);
-  const sanghefteId = useRecoilValue(sanghefteState);
-  const { userID, pamphletName } = useParams();
+  const { userReference, pamphletName } = useParams();
+  const [userID, setUserID] = useState("")
 
+  /* Use the userReference in the URL, to get the corresponding userID */
+  useEffect(() => {
+    const fetchUserID = async () => {
+      if (userReference) {
+        await getUserIdFromReference(userReference).then((r) => setUserID(r));
+      }
+    };
+    fetchUserID().catch(console.error);
+  }, [userReference]);
+
+  /* Fetch all songs with the given userID and pamphletName */
   useEffect(() => {
     const fetchSongs = async () => {
       setData([]);
-      if (pamphletName && userID) {
+
+      if (pamphletName && userID !== "") {
         await getAllSongs(pamphletName, userID).then((r) => setData(r));
       }
     };
-    fetchSongs();
-  }, [pamphletName, sanghefteId, setData, userID]);
+
+    fetchSongs().catch(console.error);
+  }, [userID, pamphletName])
 
   return (
     <div className="carousel-wrapper">
-      <Carousel swipeScrollTolerance={100} showIndicators={false}>
+      <Carousel swipeScrollTolerance={100} showIndicators={false} showThumbs={false}>
         {data &&
           data.map((d, index) => {
             return (
