@@ -18,10 +18,14 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/newsong" element={<NewSong />} />
-            <Route path="/sing" element={<SongContainer />} />
+            <Route
+              path="/sing/:userReference/:pamphletName"
+              element={<SongContainer />}
+            />
             <Route path="/pamphlet" element={<NewPamphlet />} />
           </Routes>
         </BrowserRouter>
+        ,
       </RecoilRoot>
     </ChakraProvider>
   );

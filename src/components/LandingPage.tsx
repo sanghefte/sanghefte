@@ -27,19 +27,21 @@ export const LandingPage = () => {
   const navigate = useNavigate();
 
   /* Local storage */
-  const localStorageKey = "userID";
+  const localStorage_userIdKey = "userID";
 
   const handleButton = async () => {
     /* Sjekke om localstorage allerede har en brukerID */
-    if (!localStorage.getItem(localStorageKey)) {
+    if (!localStorage.getItem(localStorage_userIdKey)) {
       await generateUser().catch(console.error);
     }
 
-    const userID = localStorage.getItem(localStorageKey);
+    const userID = localStorage.getItem(localStorage_userIdKey);
 
     if (userID !== null) {
       await createSanghefte(userWord, userID).catch(console.error);
     }
+
+    setUserWord(userWord);
 
     navigate("/newsong");
   };
