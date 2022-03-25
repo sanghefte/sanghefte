@@ -23,13 +23,22 @@ export type Song = {
  * Gets all songs in a son pamphlet.
  *
  * @param SanghefteId The Id of the song pamphlet.
+ * @param userID Id of the creator of the pamphlet.
  * @return {Array} Returns all songs in a song pamphlet.
  */
 
 export const getAllSongs = async (
-  SanghefteId: string
+  SanghefteId: string,
+  userID: string
 ): Promise<Array<Song>> => {
-  const dataCollectionRef = collection(db, "sanghefter", SanghefteId, "sanger");
+  const dataCollectionRef = collection(
+    db,
+    "BrukerID",
+    userID,
+    "sanghefter",
+    SanghefteId,
+    "sanger"
+  );
   const querySnapshot = await getDocs(dataCollectionRef);
 
   return querySnapshot.docs.map((_data) => ({
@@ -69,11 +78,19 @@ export const createSanghefte = async (docName: string, userID: string) => {
 };
 
 /**
- * Generates a user
+ * Generates a user, and creates a reference
  */
 export const generateUser = async () => {
   const docRef = await addDoc(collection(db, "BrukerID"), {});
   localStorage.setItem("userID", docRef.id);
+  await createUserReference(docRef.id);
+};
+
+export const createUserReference = async (userID: string) => {
+  const docRef = await addDoc(collection(db, "UserReferences"), {
+    userID: userID,
+  });
+  localStorage.setItem("userReference", docRef.id);
 };
 
 /**
@@ -144,4 +161,17 @@ export const deleteSong = async (
   );
   deleteDoc(docRef);
   console.log("Deleted " + songTitle);
+};
+
+export const getUserIdFromReference = async (
+  userReference: string
+): Promise<string> => {
+  const docRef = doc(db, "UserReferences", userReference);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data().userID;
+  } else {
+    return "";
+  }
 };
