@@ -23,7 +23,8 @@ export const NewSong = () => {
   const sanghefte = useRecoilValue(sanghefteState);
   const navigate = useNavigate();
 
-  const localStorageKey = "userID";
+  const localStorage_userIdKey = "userID";
+  const localStorage_userReferenceKey = "userReference";
 
   const handleClick = () => {
     toast({
@@ -34,10 +35,18 @@ export const NewSong = () => {
       isClosable: true,
     });
 
-    const userID = localStorage.getItem(localStorageKey);
+    const userID = localStorage.getItem(localStorage_userIdKey);
 
     if (userID !== null) {
       createSong(userID, sanghefte, title, text, artist).catch(console.error);
+    }
+  };
+
+  const share = () => {
+    const userReference = localStorage.getItem(localStorage_userReferenceKey);
+
+    if (userReference !== null) {
+      console.log("sanghefte.no/sing/" + userReference + "/" + sanghefte);
     }
   };
 
@@ -45,7 +54,7 @@ export const NewSong = () => {
    * Takes the user to the hub if it exists
    */
   const handleCLick2 = () => {
-    const userID = localStorage.getItem(localStorageKey);
+    const userID = localStorage.getItem(localStorage_userIdKey);
 
     if (userID !== null) {
       navigate("/");
@@ -88,6 +97,9 @@ export const NewSong = () => {
           </Button>
           <Button isFullWidth onClick={handleCLick2}>
             Fullfør sanghefte
+          </Button>
+          <Button onClick={share} isFullWidth>
+            Share
           </Button>
         </VStack>
       </Container>
