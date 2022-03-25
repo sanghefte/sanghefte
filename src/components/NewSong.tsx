@@ -21,7 +21,8 @@ export const NewSong = () => {
   const [artist, setArtist] = useState("");
   const sanghefte = useRecoilValue(sanghefteState);
 
-  const localStorageKey = "userID";
+  const localStorage_userIdKey = "userID";
+  const localStorage_userReferenceKey = "userReference";
 
   const handleClick = () => {
     toast({
@@ -32,10 +33,18 @@ export const NewSong = () => {
       isClosable: true,
     });
 
-    const userID = localStorage.getItem(localStorageKey);
+    const userID = localStorage.getItem(localStorage_userIdKey);
 
     if (userID !== null) {
       createSong(userID, sanghefte, title, text, artist).catch(console.error);
+    }
+  };
+
+  const share = () => {
+    const userReference = localStorage.getItem(localStorage_userReferenceKey);
+
+    if (userReference !== null) {
+      console.log("sanghefte.no/sing/" + userReference + "/" + sanghefte);
     }
   };
 
@@ -74,6 +83,9 @@ export const NewSong = () => {
             Legg til ny sang
           </Button>
           <Button isFullWidth>Fullfør sanghefte</Button>
+          <Button onClick={share} isFullWidth>
+            Share
+          </Button>
         </VStack>
       </Container>
     </Flex>
