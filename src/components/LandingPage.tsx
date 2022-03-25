@@ -61,7 +61,7 @@ export const LandingPage = () => {
     }
   };
 
-  if (!localStorage.getItem(localStorageKey)) {
+  if (!localStorage.getItem(localStorage_userIdKey)) {
     return (
       <Box>
         <Flex
