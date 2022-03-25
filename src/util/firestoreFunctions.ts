@@ -49,6 +49,21 @@ export const getAllSongs = async (
   }));
 };
 
+export type Pamphlet = {
+  id: string;
+};
+
+export const getAllPamphlets = async (
+  userID: string
+): Promise<Array<Pamphlet>> => {
+  const dataCollectionRef = collection(db, "BrukerID", userID, "sanghefter");
+  const querySnapshot = await getDocs(dataCollectionRef);
+
+  return querySnapshot.docs.map((_data) => ({
+    id: _data.id,
+  }));
+};
+
 /**
  * Checks if provided pamphlet id already exists
  * @return {Boolean} Returns all songs in a song pamphlet.
