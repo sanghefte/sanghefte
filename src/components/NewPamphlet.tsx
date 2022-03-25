@@ -1,6 +1,14 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Container, Flex, Input, useColorModeValue, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Input,
+  useColorModeValue,
+  VStack,
+} from "@chakra-ui/react";
 import { createSanghefte } from "../util/firestoreFunctions";
 import { useRecoilState } from "recoil";
 import { sanghefteState } from "../store/store";
@@ -10,15 +18,14 @@ export const NewPamphlet = () => {
 
   const bgcolor = useColorModeValue("white", "whiteAlpha.50");
   const localStorageKey = "userID";
-  const userID = localStorage.getItem(localStorageKey)
+  const userID = localStorage.getItem(localStorageKey);
   const navigate = useNavigate();
 
-
   const handleButton = async () => {
-    if(userID !== null) {
-      await createSanghefte(userWord, userID).catch(console.error)
+    if (userID !== null) {
+      await createSanghefte(userWord, userID).catch(console.error);
     }
-    navigate("/newsong")
+    navigate("/newsong");
   };
 
   return (
@@ -53,6 +60,5 @@ export const NewPamphlet = () => {
         </Container>
       </Flex>
     </Box>
-  )
-
-}
+  );
+};

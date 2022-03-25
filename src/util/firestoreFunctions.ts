@@ -41,11 +41,11 @@ export const getAllSongs = async (
 };
 
 export type Pamphlet = {
-  id: string
-}
+  id: string;
+};
 
 export const getAllPamphlets = async (
-    userID: string
+  userID: string
 ): Promise<Array<Pamphlet>> => {
   const dataCollectionRef = collection(db, "BrukerID", userID, "sanghefter");
   const querySnapshot = await getDocs(dataCollectionRef);

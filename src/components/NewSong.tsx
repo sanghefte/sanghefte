@@ -21,7 +21,7 @@ export const NewSong = () => {
   const [text, setText] = useState("");
   const [artist, setArtist] = useState("");
   const sanghefte = useRecoilValue(sanghefteState);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const localStorageKey = "userID";
 
@@ -48,9 +48,9 @@ export const NewSong = () => {
     const userID = localStorage.getItem(localStorageKey);
 
     if (userID !== null) {
-      navigate("/")
+      navigate("/");
     }
-  }
+  };
 
   return (
     <Flex
@@ -86,11 +86,9 @@ export const NewSong = () => {
           <Button onClick={handleClick} isFullWidth colorScheme="teal">
             Legg til ny sang
           </Button>
-          <Button
-            isFullWidth
-            onClick={handleCLick2}
-          >
-            Fullfør sanghefte</Button>
+          <Button isFullWidth onClick={handleCLick2}>
+            Fullfør sanghefte
+          </Button>
         </VStack>
       </Container>
     </Flex>
