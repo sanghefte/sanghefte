@@ -60,7 +60,7 @@ export const UpdateSong = () => {
   useEffect(() => {
     const userID = localStorage.getItem(localStorage_userIdKey);
     if (userID) getSong(userID, sanghefte, songID).then((r) => setSongInfo(r));
-  }, []);
+  }, [sanghefte, songID]);
 
   return (
     <Flex
