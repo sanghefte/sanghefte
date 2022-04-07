@@ -27,6 +27,11 @@ export const NewSong = () => {
   const localStorage_userReferenceKey = "userReference";
 
   const handleClick = () => {
+    const userID = localStorage.getItem(localStorage_userIdKey);
+
+    if (userID !== null) {
+      createSong(userID, sanghefte, title, text, artist).catch(console.error);
+    }
     toast({
       title: "Sang lagt til.",
       description: "Sangen har blitt lagt til i sangheftet.",
@@ -34,12 +39,6 @@ export const NewSong = () => {
       duration: 3000,
       isClosable: true,
     });
-
-    const userID = localStorage.getItem(localStorage_userIdKey);
-
-    if (userID !== null) {
-      createSong(userID, sanghefte, title, text, artist).catch(console.error);
-    }
   };
 
   const share = () => {
