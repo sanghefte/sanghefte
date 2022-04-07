@@ -65,7 +65,7 @@ export const PamphletMenu = () => {
               <PamphletContent pamphletId={pamphlet.id!} />
               <br />
               <Button onClick={() => deletePamphlet(pamphlet.id)}>
-                Delete
+                Delete pamphlet
               </Button>
               <Button>Share</Button>
               <Button onClick={() => addSong(pamphlet.id)}>Add song</Button>
