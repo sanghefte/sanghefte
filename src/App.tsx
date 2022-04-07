@@ -23,7 +23,7 @@ function App() {
               path="/sing/:userReference/:pamphletName"
               element={<SongContainer />}
             />
-            <Route path="/updatesong" element={<UpdateSong />}/>
+            <Route path="/updatesong" element={<UpdateSong />} />
             <Route path="/pamphlet" element={<NewPamphlet />} />
           </Routes>
         </BrowserRouter>
