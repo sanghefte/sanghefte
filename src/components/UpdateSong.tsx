@@ -21,13 +21,12 @@ import {
 
 export const UpdateSong = () => {
   const toast = useToast();
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const [artist, setArtist] = useState("");
   const sanghefte = useRecoilValue(sanghefteState);
   const songID = useRecoilValue(songIDState);
   const navigate = useNavigate();
-  const [songInfo, setSongInfo] = useState<Song>();
+  const [songTitle, setSongTitle] = useState("");
+  const [songCreator, setSongCreator] = useState("");
+  const [songText, setSongText] = useState("");
 
   const localStorage_userIdKey = "userID";
 
@@ -39,9 +38,9 @@ export const UpdateSong = () => {
         userID,
         sanghefte,
         songID,
-        title,
-        text,
-        artist
+        songTitle,
+        songText,
+        songCreator
       ).catch(console.error);
     }
     toast({
@@ -57,9 +56,16 @@ export const UpdateSong = () => {
     navigate("/");
   };
 
+  const updateValueOfFields = async (result: Song) => {
+    setSongTitle(result.title);
+    setSongCreator(result.creator);
+    setSongText(result.text);
+  };
+
   useEffect(() => {
     const userID = localStorage.getItem(localStorage_userIdKey);
-    if (userID) getSong(userID, sanghefte, songID).then((r) => setSongInfo(r));
+    if (userID)
+      getSong(userID, sanghefte, songID).then((r) => updateValueOfFields(r));
   }, [sanghefte, songID]);
 
   return (
@@ -78,20 +84,20 @@ export const UpdateSong = () => {
           <Heading size="sm"> Tittel </Heading>
           <Input
             textAlign="center"
-            value={songInfo && songInfo.title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={songTitle}
+            onChange={(e) => setSongTitle(e.target.value)}
           />
           <Heading size="sm"> Artist </Heading>
           <Input
             textAlign="center"
-            value={songInfo && songInfo.creator}
-            onChange={(e) => setArtist(e.target.value)}
+            value={songCreator}
+            onChange={(e) => setSongCreator(e.target.value)}
           />
           <Heading size="sm"> Sangtekst </Heading>
           <Textarea
             textAlign="center"
-            value={songInfo && songInfo.text}
-            onChange={(e) => setText(e.target.value)}
+            value={songText}
+            onChange={(e) => setSongText(e.target.value)}
           />
           <Button onClick={updateSong} isFullWidth colorScheme="teal">
             Lagre endringer
