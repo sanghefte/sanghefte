@@ -6,7 +6,7 @@ import {
   getDocs,
   setDoc,
   addDoc,
-    updateDoc
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "./firebase-config";
 
@@ -139,13 +139,7 @@ export const createSong = async (
   text: string,
   creator: string
 ) => {
-  const docRef = doc(
-    db,
-    "BrukerID",
-    userID,
-    "sanghefter",
-    pathSegment,
-  );
+  const docRef = doc(db, "BrukerID", userID, "sanghefter", pathSegment);
   addDoc(collection(docRef, "sanger"), {
     title: songTitle,
     text: text,
@@ -153,19 +147,29 @@ export const createSong = async (
   });
 };
 
-export const updateSongInPamphlet = async(userID: string,
-                        pathSegment: string,
-                        songID: string,
-                        songTitle: string,
-                        text: string,
-                        creator: string) => {
-  const docRef = doc(db, "BrukerID", userID, "sanghefter", pathSegment, "sanger", songID)
+export const updateSongInPamphlet = async (
+  userID: string,
+  pathSegment: string,
+  songID: string,
+  songTitle: string,
+  text: string,
+  creator: string
+) => {
+  const docRef = doc(
+    db,
+    "BrukerID",
+    userID,
+    "sanghefter",
+    pathSegment,
+    "sanger",
+    songID
+  );
   updateDoc(docRef, {
     title: songTitle,
     text: text,
     creator: creator,
-  })
-}
+  });
+};
 
 /**
  * Deletes a song from a song pamphlet

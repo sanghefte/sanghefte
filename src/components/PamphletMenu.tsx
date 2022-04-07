@@ -14,15 +14,15 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import {useRecoilState} from "recoil";
-import {sanghefteState} from "../store/store";
+import { useRecoilState } from "recoil";
+import { sanghefteState } from "../store/store";
 
 export const PamphletMenu = () => {
   const [pamphlets, setPamphlets] = useState<Array<Pamphlet>>([]);
   const localStorageKey = "userID";
   const userID = localStorage.getItem(localStorageKey);
   const navigate = useNavigate();
-  const [sanghefte, setSanghefte] = useRecoilState(sanghefteState)
+  const [sanghefte, setSanghefte] = useRecoilState(sanghefteState);
 
   useEffect(() => {
     const fetchPamphlets = async () => {
@@ -53,7 +53,7 @@ export const PamphletMenu = () => {
             </h1>
             <AccordionPanel>
               <PamphletContent pamphletId={pamphlet.id!} />
-              <br/>
+              <br />
               <Button onClick={() => deletePamphlet(pamphlet.id)}>
                 Delete
               </Button>
