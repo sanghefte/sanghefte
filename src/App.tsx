@@ -25,7 +25,6 @@ function App() {
             <Route path="/pamphlet" element={<NewPamphlet />} />
           </Routes>
         </BrowserRouter>
-        ,
       </RecoilRoot>
     </ChakraProvider>
   );
