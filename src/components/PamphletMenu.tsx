@@ -22,7 +22,7 @@ export const PamphletMenu = () => {
   const localStorageKey = "userID";
   const userID = localStorage.getItem(localStorageKey);
   const navigate = useNavigate();
-  const [sanghefte, setSanghefte] = useRecoilState(sanghefteState);
+  const [, setSanghefte] = useRecoilState(sanghefteState);
 
   useEffect(() => {
     const fetchPamphlets = async () => {

@@ -11,7 +11,7 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
   const localStorageKey = "userID";
   const userID = localStorage.getItem(localStorageKey);
   const navigate = useNavigate();
-  const [songID, setSongID] = useRecoilState(songIDState);
+  const [, setSongID] = useRecoilState(songIDState);
   const [songsData, setSongsData] = useState<Array<Song>>([]);
 
   useEffect(() => {
