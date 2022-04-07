@@ -4,6 +4,7 @@ import {
   getAllPamphlets,
   Pamphlet,
 } from "../util/firestoreFunctions";
+import { PamphletContent } from "./PhampletContent";
 import {
   Accordion,
   AccordionButton,
@@ -48,13 +49,13 @@ export const PamphletMenu = () => {
               </AccordionButton>
             </h1>
             <AccordionPanel>
+              <PamphletContent pamphletId={pamphlet.id!} />
               <Button onClick={() => deletePamphlet(pamphlet.id)}>
                 Delete
               </Button>
               <Button>Update</Button>
               <Button>Share</Button>
               <Button>Add song</Button>
-              <h1 className={"link" + pamphlet.id}>noe</h1>
             </AccordionPanel>
           </AccordionItem>
         ))}
