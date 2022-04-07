@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getAllSongs, Song } from "../util/firestoreFunctions";
+import { deleteSong, getAllSongs, Song } from "../util/firestoreFunctions";
 import { Button } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { songIDState } from "../store/store";
-import { useRecoilState } from "recoil";
+import { sanghefteState, songIDState } from "../store/store";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 export const PamphletContent: React.FC<{ pamphletId: string }> = ({
   pamphletId,
@@ -12,6 +12,7 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
   const userID = localStorage.getItem(localStorageKey);
   const navigate = useNavigate();
   const [, setSongID] = useRecoilState(songIDState);
+  const pamphet = useRecoilValue(sanghefteState);
   const [songsData, setSongsData] = useState<Array<Song>>([]);
 
   useEffect(() => {
@@ -29,12 +30,24 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
     navigate("/updatesong");
   };
 
+  const handleDeleteSong = async (songID: string) => {
+    if (userID) await deleteSong(userID, pamphet, songID);
+    refreshPage();
+  };
+
+  function refreshPage() {
+    window.location.reload();
+  }
+
   return (
     <div>
       {songsData &&
         songsData.map((song) => [
           <p key={song.id}>{song.title}</p>,
           <Button onClick={() => updateSong(song.id)}>Update</Button>,
+          <Button onClick={() => handleDeleteSong(song.id)}>
+            Delete song
+          </Button>,
         ])}
     </div>
   );
