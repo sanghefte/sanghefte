@@ -9,11 +9,15 @@ import {
   useToast,
   VStack,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { sanghefteState, songIDState } from "../store/store";
 import { useNavigate } from "react-router-dom";
-import { updateSongInPamphlet } from "../util/firestoreFunctions";
+import {
+  updateSongInPamphlet,
+  getSong,
+  Song,
+} from "../util/firestoreFunctions";
 
 export const UpdateSong = () => {
   const toast = useToast();
@@ -23,6 +27,7 @@ export const UpdateSong = () => {
   const sanghefte = useRecoilValue(sanghefteState);
   const songID = useRecoilValue(songIDState);
   const navigate = useNavigate();
+  const [songInfo, setSongInfo] = useState<Song>();
 
   const localStorage_userIdKey = "userID";
 
@@ -52,6 +57,11 @@ export const UpdateSong = () => {
     navigate("/");
   };
 
+  useEffect(() => {
+    const userID = localStorage.getItem(localStorage_userIdKey);
+    if (userID) getSong(userID, sanghefte, songID).then((r) => setSongInfo(r));
+  }, []);
+
   return (
     <Flex
       align="center"
@@ -68,19 +78,19 @@ export const UpdateSong = () => {
           <Heading size="sm"> Tittel </Heading>
           <Input
             textAlign="center"
-            placeholder="Legg til sangtittel"
+            value={songInfo && songInfo.title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <Heading size="sm"> Artist </Heading>
           <Input
             textAlign="center"
-            placeholder="Legg til artist"
+            value={songInfo && songInfo.creator}
             onChange={(e) => setArtist(e.target.value)}
           />
           <Heading size="sm"> Sangtekst </Heading>
           <Textarea
             textAlign="center"
-            placeholder="Legg inn sangtekst"
+            value={songInfo && songInfo.text}
             onChange={(e) => setText(e.target.value)}
           />
           <Button onClick={updateSong} isFullWidth colorScheme="teal">

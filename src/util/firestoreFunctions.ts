@@ -21,6 +21,35 @@ export type Song = {
 };
 
 /**
+ * Gets a single song from a pamphlet
+ * @param userID The users id
+ * @param sanghefte The pamphlet where the song is located
+ * @param songID Id if the song we want to get
+ */
+export const getSong = async (
+  userID: string,
+  sanghefte: string,
+  songID: string
+): Promise<Song> => {
+  const dataCollectionRef = doc(
+    db,
+    "BrukerID",
+    userID,
+    "sanghefter",
+    sanghefte,
+    "sanger",
+    songID
+  );
+  const data = await getDoc(dataCollectionRef);
+  return {
+    id: data.id,
+    title: data.get("title"),
+    text: data.get("text"),
+    creator: data.get("creator"),
+  };
+};
+
+/**
  * Gets all songs in a son pamphlet.
  *
  * @param SanghefteId The Id of the song pamphlet.
