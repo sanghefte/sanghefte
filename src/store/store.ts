@@ -7,3 +7,8 @@ export const sanghefteState = atom({
   key: "sanghefteState",
   default: "test",
 });
+
+export const songIDState = atom({
+  key: "songIDState",
+  default: "test",
+});

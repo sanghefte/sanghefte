@@ -9,6 +9,7 @@ import { RecoilRoot } from "recoil";
 import { SongContainer } from "./components/SongContainer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { NewPamphlet } from "./components/NewPamphlet";
+import { UpdateSong } from "./components/UpdateSong";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               path="/sing/:userReference/:pamphletName"
               element={<SongContainer />}
             />
+            <Route path="/updatesong" element={<UpdateSong />}/>
             <Route path="/pamphlet" element={<NewPamphlet />} />
           </Routes>
         </BrowserRouter>

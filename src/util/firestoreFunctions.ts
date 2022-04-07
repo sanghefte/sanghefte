@@ -6,6 +6,7 @@ import {
   getDocs,
   setDoc,
   addDoc,
+    updateDoc
 } from "firebase/firestore";
 import { db } from "./firebase-config";
 
@@ -144,15 +145,27 @@ export const createSong = async (
     userID,
     "sanghefter",
     pathSegment,
-    "sanger",
-    songTitle
   );
-  setDoc(docRef, {
+  addDoc(collection(docRef, "sanger"), {
     title: songTitle,
     text: text,
     creator: creator,
   });
 };
+
+export const updateSongInPamphlet = async(userID: string,
+                        pathSegment: string,
+                        songID: string,
+                        songTitle: string,
+                        text: string,
+                        creator: string) => {
+  const docRef = doc(db, "BrukerID", userID, "sanghefter", pathSegment, "sanger", songID)
+  updateDoc(docRef, {
+    title: songTitle,
+    text: text,
+    creator: creator,
+  })
+}
 
 /**
  * Deletes a song from a song pamphlet
