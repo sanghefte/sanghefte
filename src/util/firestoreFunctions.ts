@@ -39,6 +39,7 @@ export const getAllSongs = async (
     SanghefteId,
     "sanger"
   );
+
   const querySnapshot = await getDocs(dataCollectionRef);
 
   return querySnapshot.docs.map((_data) => ({
