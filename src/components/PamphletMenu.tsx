@@ -34,11 +34,16 @@ export const PamphletMenu = () => {
 
   const deletePamphlet = async (pamphletID: string) => {
     if (userID) await deleteSanghefte(userID, pamphletID);
+    refreshPage();
   };
 
   const handleButton = () => {
     navigate("/pamphlet");
   };
+
+  function refreshPage() {
+    window.location.reload();
+  }
 
   const addSong = (songpamphlet: string) => {
     setSanghefte(songpamphlet);
