@@ -40,6 +40,11 @@ export const PamphletMenu = () => {
     navigate("/pamphlet");
   };
 
+  const addSong = (songpamphlet: string) => {
+    setSanghefte(songpamphlet);
+    navigate("/newsong");
+  };
+
   return (
     <>
       <Button onClick={handleButton}>+</Button>
@@ -58,7 +63,7 @@ export const PamphletMenu = () => {
                 Delete
               </Button>
               <Button>Share</Button>
-              <Button>Add song</Button>
+              <Button onClick={() => addSong(pamphlet.id)}>Add song</Button>
             </AccordionPanel>
           </AccordionItem>
         ))}
