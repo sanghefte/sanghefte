@@ -36,7 +36,7 @@ export const PamphletMenu = () => {
   const [pamphletMagicLink, setPamphletMagicLink] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [copyLinkBackgroundColor, setCopyLinkBackgroundColor] =
-    useState("#4BB543");
+    useState("white");
 
   const localStorage_userReferenceKey = "userReference";
   const userReference = localStorage.getItem(localStorage_userReferenceKey);
