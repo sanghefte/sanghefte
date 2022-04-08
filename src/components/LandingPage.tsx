@@ -6,15 +6,13 @@ import {
   Container,
   VStack,
   Button,
-  useColorModeValue,
-  useToast,
+  useColorModeValue
 } from "@chakra-ui/react";
 import {
-  checkIfPamphletExist,
   createSanghefte,
   generateUser,
 } from "../util/firestoreFunctions";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { sanghefteState } from "../store/store";
 import { useNavigate } from "react-router-dom";
 import { PamphletMenu } from "./PamphletMenu";
@@ -22,8 +20,6 @@ import { PamphletMenu } from "./PamphletMenu";
 export const LandingPage = () => {
   const bgcolor = useColorModeValue("white", "whiteAlpha.50");
   const [userWord, setUserWord] = useRecoilState(sanghefteState);
-  const toast = useToast(); //ChakraUI funksjon for å få en bekreftelses-toast https://chakra-ui.com/docs/feedback/toast
-  const sanghefteId = useRecoilValue(sanghefteState);
   const navigate = useNavigate();
 
   /* Local storage */
@@ -44,21 +40,6 @@ export const LandingPage = () => {
     setUserWord(userWord);
 
     navigate("/newsong");
-  };
-
-  const handleButton2 = async () => {
-    if (await checkIfPamphletExist(sanghefteId, "sanghefter")) {
-      console.log("Success! vi fant sanghefte", sanghefteId);
-      navigate("/sing");
-    } else {
-      toast({
-        title: "Fant ikke sanghefte med id: " + sanghefteId,
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-      });
-      console.log("fant ikke hefte med sanghefteID: ", sanghefteId);
-    }
   };
 
   if (!localStorage.getItem(localStorage_userIdKey)) {
@@ -88,21 +69,6 @@ export const LandingPage = () => {
                   //variant="outline"
                 >
                   Create Sanghefte
-                </Button>
-              </Box>
-              <Box p={5} borderRadius="lg" shadow="md" bg={bgcolor}>
-                <Input
-                  size="lg"
-                  placeholder="Enter pin"
-                  onChange={(e) => setUserWord(e.target.value)}
-                />
-                <Button
-                  isFullWidth
-                  mt={3}
-                  onClick={handleButton2}
-                  //variant="outline"
-                >
-                  Join
                 </Button>
               </Box>
             </VStack>
