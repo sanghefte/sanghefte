@@ -52,7 +52,9 @@ export const SongContainer = () => {
               <Container key={index}>
                 <Heading mt={5}>{d.title}</Heading>
                 <Text as="i">Av: {d.creator}</Text>
-                <Text style={{whiteSpace: "pre-wrap"}} mt={3}>{d.text}</Text>
+                <Text style={{ whiteSpace: "pre-wrap" }} mt={3}>
+                  {d.text}
+                </Text>
               </Container>
             );
           })}
