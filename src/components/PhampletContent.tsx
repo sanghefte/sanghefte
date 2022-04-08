@@ -12,7 +12,7 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
   const userID = localStorage.getItem(localStorageKey);
   const navigate = useNavigate();
   const [, setSongID] = useRecoilState(songIDState);
-  const pamphet = useRecoilValue(sanghefteState);
+  const pamphlet = useRecoilValue(sanghefteState);
   const [songsData, setSongsData] = useState<Array<Song>>([]);
 
   useEffect(() => {
@@ -31,13 +31,13 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
   };
 
   const handleDeleteSong = async (songID: string) => {
-    if (userID) await deleteSong(userID, pamphet, songID);
+    if (userID) await deleteSong(userID, pamphlet, songID);
     refreshPage();
   };
 
-  function refreshPage() {
+  const refreshPage = () => {
     window.location.reload();
-  }
+  };
 
   return (
     <div>

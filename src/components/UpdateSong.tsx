@@ -42,14 +42,14 @@ export const UpdateSong = () => {
         songText,
         songCreator
       ).catch(console.error);
+      toast({
+        title: "Sang er redigert.",
+        description: "Den oppdaterte sangen ligger nå i heftet.",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
     }
-    toast({
-      title: "Sang er redigert.",
-      description: "Den oppdaterte sangen ligger nå i heftet.",
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-    });
   };
 
   const backToMenu = () => {
