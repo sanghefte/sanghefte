@@ -26,11 +26,13 @@ export const NewSong = () => {
   const localStorage_userIdKey = "userID";
   const localStorage_userReferenceKey = "userReference";
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const userID = localStorage.getItem(localStorage_userIdKey);
 
     if (userID !== null) {
-      createSong(userID, sanghefte, title, text, artist).catch(console.error);
+      await createSong(userID, sanghefte, title, text, artist).catch(
+        console.error
+      );
       setText("");
       setTitle("");
       setArtist("");
