@@ -12,9 +12,17 @@ import {
   AccordionPanel,
   Box,
   Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { sanghefteState } from "../store/store";
 
 export const PamphletMenu = () => {
@@ -23,6 +31,23 @@ export const PamphletMenu = () => {
   const userID = localStorage.getItem(localStorageKey);
   const navigate = useNavigate();
   const [, setSanghefte] = useRecoilState(sanghefteState);
+  const sanghefte = useRecoilValue(sanghefteState);
+
+  const [pamphletMagicLink, setPamphletMagicLink] = useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [copyLinkBackgroundColor, setCopyLinkBackgroundColor] =
+    useState("#4BB543");
+
+  const localStorage_userReferenceKey = "userReference";
+  const userReference = localStorage.getItem(localStorage_userReferenceKey);
+
+  const updateMagicLink = () => {
+    if (userReference !== null) {
+      setPamphletMagicLink(
+        "sanghefte.no/sing/" + userReference + "/" + sanghefte
+      );
+    }
+  };
 
   useEffect(() => {
     const fetchPamphlets = async () => {
@@ -67,7 +92,48 @@ export const PamphletMenu = () => {
               <Button onClick={() => deletePamphlet(pamphlet.id)}>
                 Delete pamphlet
               </Button>
-              <Button>Share</Button>
+              <Button
+                onClick={() => {
+                  onOpen();
+                  updateMagicLink();
+                  setCopyLinkBackgroundColor("white");
+                }}
+              >
+                Share
+              </Button>
+
+              <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                  <ModalHeader>Link til ditt hefte:</ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody>
+                    <p>{pamphletMagicLink}</p>
+                  </ModalBody>
+
+                  <ModalFooter>
+                    <Button colorScheme="blue" mr={3} onClick={onClose}>
+                      Lukk
+                    </Button>
+                    <Button
+                      color={
+                        copyLinkBackgroundColor === "white" ? "black" : "white"
+                      }
+                      backgroundColor={copyLinkBackgroundColor}
+                      variant="ghost"
+                      onClick={() => {
+                        navigator.clipboard.writeText(pamphletMagicLink);
+                        setCopyLinkBackgroundColor("#4BB543");
+                      }}
+                    >
+                      {copyLinkBackgroundColor === "white"
+                        ? "Kopiér Link"
+                        : "Link Kopiert!"}
+                    </Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
+
               <Button onClick={() => addSong(pamphlet.id)}>Add song</Button>
             </AccordionPanel>
           </AccordionItem>
