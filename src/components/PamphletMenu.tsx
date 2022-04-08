@@ -14,12 +14,15 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { sanghefteState } from "../store/store";
 
 export const PamphletMenu = () => {
   const [pamphlets, setPamphlets] = useState<Array<Pamphlet>>([]);
   const localStorageKey = "userID";
   const userID = localStorage.getItem(localStorageKey);
   const navigate = useNavigate();
+  const [, setSanghefte] = useRecoilState(sanghefteState);
 
   useEffect(() => {
     const fetchPamphlets = async () => {
@@ -31,10 +34,20 @@ export const PamphletMenu = () => {
 
   const deletePamphlet = async (pamphletID: string) => {
     if (userID) await deleteSanghefte(userID, pamphletID);
+    refreshPage();
   };
 
   const handleButton = () => {
     navigate("/pamphlet");
+  };
+
+  function refreshPage() {
+    window.location.reload();
+  }
+
+  const addSong = (songpamphlet: string) => {
+    setSanghefte(songpamphlet);
+    navigate("/newsong");
   };
 
   return (
@@ -44,18 +57,18 @@ export const PamphletMenu = () => {
         {pamphlets.map((pamphlet) => (
           <AccordionItem key={pamphlet.id}>
             <h1>
-              <AccordionButton>
+              <AccordionButton onClick={() => setSanghefte(pamphlet.id)}>
                 <Box>{pamphlet.id}</Box>
               </AccordionButton>
             </h1>
             <AccordionPanel>
               <PamphletContent pamphletId={pamphlet.id!} />
+              <br />
               <Button onClick={() => deletePamphlet(pamphlet.id)}>
-                Delete
+                Delete pamphlet
               </Button>
-              <Button>Update</Button>
               <Button>Share</Button>
-              <Button>Add song</Button>
+              <Button onClick={() => addSong(pamphlet.id)}>Add song</Button>
             </AccordionPanel>
           </AccordionItem>
         ))}

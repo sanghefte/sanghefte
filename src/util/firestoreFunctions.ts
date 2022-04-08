@@ -6,6 +6,7 @@ import {
   getDocs,
   setDoc,
   addDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "./firebase-config";
 
@@ -17,6 +18,35 @@ export type Song = {
   title: string;
   text: string;
   creator: string;
+};
+
+/**
+ * Gets a single song from a pamphlet
+ * @param userID The users id
+ * @param sanghefte The pamphlet where the song is located
+ * @param songID Id if the song we want to get
+ */
+export const getSong = async (
+  userID: string,
+  sanghefte: string,
+  songID: string
+): Promise<Song> => {
+  const dataCollectionRef = doc(
+    db,
+    "BrukerID",
+    userID,
+    "sanghefter",
+    sanghefte,
+    "sanger",
+    songID
+  );
+  const data = await getDoc(dataCollectionRef);
+  return {
+    id: data.id,
+    title: data.get("title"),
+    text: data.get("text"),
+    creator: data.get("creator"),
+  };
 };
 
 /**
@@ -138,6 +168,22 @@ export const createSong = async (
   text: string,
   creator: string
 ) => {
+  const docRef = doc(db, "BrukerID", userID, "sanghefter", pathSegment);
+  addDoc(collection(docRef, "sanger"), {
+    title: songTitle,
+    text: text,
+    creator: creator,
+  });
+};
+
+export const updateSongInPamphlet = async (
+  userID: string,
+  pathSegment: string,
+  songID: string,
+  songTitle: string,
+  text: string,
+  creator: string
+) => {
   const docRef = doc(
     db,
     "BrukerID",
@@ -145,9 +191,9 @@ export const createSong = async (
     "sanghefter",
     pathSegment,
     "sanger",
-    songTitle
+    songID
   );
-  setDoc(docRef, {
+  updateDoc(docRef, {
     title: songTitle,
     text: text,
     creator: creator,
