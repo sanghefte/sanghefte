@@ -26,11 +26,16 @@ export const NewSong = () => {
   const localStorage_userIdKey = "userID";
   const localStorage_userReferenceKey = "userReference";
 
-  const handleClick = () => {
+  const handleClick = async () => {
     const userID = localStorage.getItem(localStorage_userIdKey);
 
     if (userID !== null) {
-      createSong(userID, sanghefte, title, text, artist).catch(console.error);
+      await createSong(userID, sanghefte, title, text, artist).catch(
+        console.error
+      );
+      setText("");
+      setTitle("");
+      setArtist("");
     }
     toast({
       title: "Sang lagt til.",
@@ -77,18 +82,21 @@ export const NewSong = () => {
           <Input
             textAlign="center"
             placeholder="Legg til sangtittel"
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <Heading size="sm"> Artist </Heading>
           <Input
             textAlign="center"
             placeholder="Legg til artist"
+            value={artist}
             onChange={(e) => setArtist(e.target.value)}
           />
           <Heading size="sm"> Sangtekst </Heading>
           <Textarea
             textAlign="center"
             placeholder="Legg inn sangtekst"
+            value={text}
             onChange={(e) => setText(e.target.value)}
           />
           <Button onClick={handleClick} isFullWidth colorScheme="teal">
