@@ -6,12 +6,9 @@ import {
   Container,
   VStack,
   Button,
-  useColorModeValue
+  useColorModeValue,
 } from "@chakra-ui/react";
-import {
-  createSanghefte,
-  generateUser,
-} from "../util/firestoreFunctions";
+import { createSanghefte, generateUser } from "../util/firestoreFunctions";
 import { useRecoilState } from "recoil";
 import { sanghefteState } from "../store/store";
 import { useNavigate } from "react-router-dom";
