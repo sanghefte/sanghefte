@@ -24,7 +24,6 @@ export const NewSong = () => {
   const navigate = useNavigate();
 
   const localStorage_userIdKey = "userID";
-  const localStorage_userReferenceKey = "userReference";
 
   const handleClick = async () => {
     const userID = localStorage.getItem(localStorage_userIdKey);
@@ -44,14 +43,6 @@ export const NewSong = () => {
       duration: 3000,
       isClosable: true,
     });
-  };
-
-  const share = () => {
-    const userReference = localStorage.getItem(localStorage_userReferenceKey);
-
-    if (userReference !== null) {
-      console.log("sanghefte.no/sing/" + userReference + "/" + sanghefte);
-    }
   };
 
   /**
@@ -103,10 +94,7 @@ export const NewSong = () => {
             Legg til ny sang
           </Button>
           <Button isFullWidth onClick={handleCLick2}>
-            Fullfør sanghefte
-          </Button>
-          <Button onClick={share} isFullWidth>
-            Share
+            Tilbake til Mine Sanghefter
           </Button>
         </VStack>
       </Container>

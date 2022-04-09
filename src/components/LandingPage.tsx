@@ -16,7 +16,7 @@ import { PamphletMenu } from "./PamphletMenu";
 
 export const LandingPage = () => {
   const bgcolor = useColorModeValue("white", "whiteAlpha.50");
-  const [userWord, setUserWord] = useRecoilState(sanghefteState);
+  const [pamphletTitle, setPamphletTitle] = useRecoilState(sanghefteState);
   const navigate = useNavigate();
 
   /* Local storage */
@@ -31,10 +31,10 @@ export const LandingPage = () => {
     const userID = localStorage.getItem(localStorage_userIdKey);
 
     if (userID !== null) {
-      await createSanghefte(userWord, userID).catch(console.error);
+      await createSanghefte(pamphletTitle, userID).catch(console.error);
     }
 
-    setUserWord(userWord);
+    setPamphletTitle(pamphletTitle);
 
     navigate("/newsong");
   };
@@ -56,8 +56,8 @@ export const LandingPage = () => {
               <Box p={5} borderRadius="lg" shadow="md" bg={bgcolor}>
                 <Input
                   size="lg"
-                  placeholder="Your Pin"
-                  onChange={(e) => setUserWord(e.target.value)}
+                  placeholder="Navn på ditt sanghefte (eks: 'Bursdagsfest')"
+                  onChange={(e) => setPamphletTitle(e.target.value)}
                 />
                 <Button
                   isFullWidth
@@ -65,7 +65,7 @@ export const LandingPage = () => {
                   onClick={handleButton}
                   //variant="outline"
                 >
-                  Create Sanghefte
+                  Opprett Sanghefte
                 </Button>
               </Box>
             </VStack>
