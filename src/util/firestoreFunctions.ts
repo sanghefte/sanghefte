@@ -221,7 +221,7 @@ export const deleteSong = async (
     "sanger",
     songTitle
   );
-  deleteDoc(docRef);
+  await deleteDoc(docRef);
   console.log("Deleted " + songTitle);
 };
 

@@ -10,8 +10,6 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
-import { useRecoilValue } from "recoil";
-import { sanghefteState, songIDState } from "../store/store";
 import { useNavigate } from "react-router-dom";
 import {
   updateSongInPamphlet,
@@ -21,8 +19,6 @@ import {
 
 export const UpdateSong = () => {
   const toast = useToast();
-  const sanghefte = useRecoilValue(sanghefteState);
-  const songID = useRecoilValue(songIDState);
   const navigate = useNavigate();
   const [songTitle, setSongTitle] = useState("");
   const [songCreator, setSongCreator] = useState("");
@@ -30,13 +26,15 @@ export const UpdateSong = () => {
 
   const localStorage_userIdKey = "userID";
 
-  const updateSong = () => {
-    const userID = localStorage.getItem(localStorage_userIdKey);
+  const userID = localStorage.getItem(localStorage_userIdKey);
+  const songID = sessionStorage.getItem("currentSong_id");
+  const pamphlet_title = sessionStorage.getItem("currentPamphlet_title");
 
-    if (userID !== null) {
+  const handleClick_updateSong = () => {
+    if (userID !== null && songID !== null && pamphlet_title !== null) {
       updateSongInPamphlet(
         userID,
-        sanghefte,
+        pamphlet_title,
         songID,
         songTitle,
         songText,
@@ -52,11 +50,11 @@ export const UpdateSong = () => {
     }
   };
 
-  const backToMenu = () => {
+  const handleClick_backToMenu = () => {
     navigate("/pamphletMenu");
   };
 
-  const updateValueOfFields = async (result: Song) => {
+  const updateValueOfFields = (result: Song) => {
     setSongTitle(result.title);
     setSongCreator(result.creator);
     setSongText(result.text);
@@ -64,9 +62,11 @@ export const UpdateSong = () => {
 
   useEffect(() => {
     const userID = localStorage.getItem(localStorage_userIdKey);
-    if (userID)
-      getSong(userID, sanghefte, songID).then((r) => updateValueOfFields(r));
-  }, [sanghefte, songID]);
+    if (userID && pamphlet_title && songID)
+      getSong(userID, pamphlet_title, songID).then((r) =>
+        updateValueOfFields(r)
+      );
+  }, [pamphlet_title, songID]);
 
   return (
     <Flex
@@ -99,10 +99,14 @@ export const UpdateSong = () => {
             value={songText}
             onChange={(e) => setSongText(e.target.value)}
           />
-          <Button onClick={updateSong} isFullWidth colorScheme="teal">
+          <Button
+            onClick={handleClick_updateSong}
+            isFullWidth
+            colorScheme="teal"
+          >
             Lagre endringer
           </Button>
-          <Button isFullWidth onClick={backToMenu}>
+          <Button isFullWidth onClick={handleClick_backToMenu}>
             Tilbake
           </Button>
         </VStack>
