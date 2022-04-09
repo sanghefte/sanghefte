@@ -11,8 +11,6 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { createSong } from "../util/firestoreFunctions";
-import { useRecoilValue } from "recoil";
-import { sanghefteState } from "../store/store";
 import { useNavigate } from "react-router-dom";
 
 export const NewSong = () => {
@@ -20,17 +18,16 @@ export const NewSong = () => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const [artist, setArtist] = useState("");
-  const sanghefte = useRecoilValue(sanghefteState);
   const navigate = useNavigate();
 
+  const pamphletTitle = sessionStorage.getItem("currentPamphlet_title");
   const localStorage_userIdKey = "userID";
-  const localStorage_userReferenceKey = "userReference";
 
-  const handleClick = async () => {
+  const handleClick_addSongToPamphlet = async () => {
     const userID = localStorage.getItem(localStorage_userIdKey);
 
-    if (userID !== null) {
-      await createSong(userID, sanghefte, title, text, artist).catch(
+    if (userID !== null && pamphletTitle !== null) {
+      await createSong(userID, pamphletTitle, title, text, artist).catch(
         console.error
       );
       setText("");
@@ -46,22 +43,14 @@ export const NewSong = () => {
     });
   };
 
-  const share = () => {
-    const userReference = localStorage.getItem(localStorage_userReferenceKey);
-
-    if (userReference !== null) {
-      console.log("sanghefte.no/sing/" + userReference + "/" + sanghefte);
-    }
-  };
-
   /**
    * Takes the user to the hub if it exists
    */
-  const handleCLick2 = () => {
+  const handleClick_goBackToMyPamphlets = () => {
     const userID = localStorage.getItem(localStorage_userIdKey);
 
     if (userID !== null) {
-      navigate("/");
+      navigate("/pamphletMenu");
     }
   };
 
@@ -76,7 +65,8 @@ export const NewSong = () => {
     >
       <Container>
         <VStack spacing={3}>
-          <Heading>Legg til ny sang</Heading>
+          <Heading>Legg til ny sang i</Heading>
+          <Heading>{pamphletTitle}</Heading>
           <Divider />
           <Heading size="sm"> Tittel </Heading>
           <Input
@@ -99,14 +89,15 @@ export const NewSong = () => {
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
-          <Button onClick={handleClick} isFullWidth colorScheme="teal">
-            Legg til ny sang
+          <Button
+            onClick={handleClick_addSongToPamphlet}
+            isFullWidth
+            colorScheme="teal"
+          >
+            Legg til sang
           </Button>
-          <Button isFullWidth onClick={handleCLick2}>
-            Fullfør sanghefte
-          </Button>
-          <Button onClick={share} isFullWidth>
-            Share
+          <Button isFullWidth onClick={handleClick_goBackToMyPamphlets}>
+            Tilbake til Mine Sanghefter
           </Button>
         </VStack>
       </Container>
