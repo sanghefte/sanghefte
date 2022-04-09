@@ -41,9 +41,10 @@ export const PamphletMenu = () => {
   const updateMagicLink = () => {
     const pamphletTitle = sessionStorage.getItem("currentPamphlet_title");
     if (userReference !== null && pamphletTitle !== null) {
-      setPamphletMagicLink(
+      const pamphletMagicLink = encodeURI(
         "sanghefte.no/sing/" + userReference + "/" + pamphletTitle
       );
+      setPamphletMagicLink(pamphletMagicLink);
     }
   };
 
