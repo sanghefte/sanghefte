@@ -53,7 +53,7 @@ export const UpdateSong = () => {
   };
 
   const backToMenu = () => {
-    navigate("/");
+    navigate("/pamphletMenu");
   };
 
   const updateValueOfFields = async (result: Song) => {

@@ -10,6 +10,7 @@ import { SongContainer } from "./components/SongContainer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { NewPamphlet } from "./components/NewPamphlet";
 import { UpdateSong } from "./components/UpdateSong";
+import { PamphletMenu } from "./components/PamphletMenu";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             />
             <Route path="/updatesong" element={<UpdateSong />} />
             <Route path="/pamphlet" element={<NewPamphlet />} />
+            <Route path="/pamphletMenu" element={<PamphletMenu />} />
           </Routes>
         </BrowserRouter>
       </RecoilRoot>
