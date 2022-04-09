@@ -24,6 +24,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { sanghefteState } from "../store/store";
+import { QRCodeSVG } from "qrcode.react";
 
 export const PamphletMenu = () => {
   const [pamphlets, setPamphlets] = useState<Array<Pamphlet>>([]);
@@ -74,7 +75,7 @@ export const PamphletMenu = () => {
     setSanghefte(songpamphlet);
     navigate("/newsong");
   };
-
+  require("qrcode.react");
   return (
     <>
       <Button onClick={handleButton}>+</Button>
@@ -109,6 +110,14 @@ export const PamphletMenu = () => {
                   <ModalCloseButton />
                   <ModalBody>
                     <p>{pamphletMagicLink}</p>
+                    <QRCodeSVG
+                      value={pamphletMagicLink}
+                      size={128}
+                      bgColor={"#ffffff"}
+                      fgColor={"#000000"}
+                      level={"L"}
+                      includeMargin={false}
+                    />
                   </ModalBody>
 
                   <ModalFooter>
