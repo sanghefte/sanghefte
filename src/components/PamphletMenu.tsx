@@ -22,6 +22,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { QRCodeSVG } from "qrcode.react";
 
 export const PamphletMenu = () => {
   const [pamphlets, setPamphlets] = useState<Array<Pamphlet>>([]);
@@ -71,7 +72,7 @@ export const PamphletMenu = () => {
     sessionStorage.setItem("currentPamphlet_title", pamphletTitle);
     navigate("/newsong");
   };
-
+  require("qrcode.react");
   return (
     <>
       <Button onClick={handleClick_createNewPamphlet}>+ Lag nytt hefte</Button>
@@ -114,6 +115,14 @@ export const PamphletMenu = () => {
                   <ModalCloseButton />
                   <ModalBody>
                     <p>{pamphletMagicLink}</p>
+                    <QRCodeSVG
+                      value={pamphletMagicLink}
+                      size={128}
+                      bgColor={"#ffffff"}
+                      fgColor={"#000000"}
+                      level={"L"}
+                      includeMargin={false}
+                    />
                   </ModalBody>
 
                   <ModalFooter>
