@@ -29,6 +29,7 @@ export const PamphletMenu = () => {
   const localStorageKey = "userID";
   const userID = localStorage.getItem(localStorageKey);
   const navigate = useNavigate();
+
   const [pamphletMagicLink, setPamphletMagicLink] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [copyLinkBackgroundColor, setCopyLinkBackgroundColor] =
