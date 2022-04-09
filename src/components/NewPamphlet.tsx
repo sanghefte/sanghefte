@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -7,24 +7,46 @@ import {
   Flex,
   Input,
   useColorModeValue,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
-import { createSanghefte } from "../util/firestoreFunctions";
-import { useRecoilState } from "recoil";
-import { sanghefteState } from "../store/store";
+import { createSanghefte, generateUser } from "../util/firestoreFunctions";
 
 export const NewPamphlet = () => {
-  const [userWord, setUserWord] = useRecoilState(sanghefteState);
+  const toast = useToast();
+  const [pamphletTitle, setPamphletTitle] = useState("");
 
   const bgcolor = useColorModeValue("white", "whiteAlpha.50");
-  const localStorageKey = "userID";
-  const userID = localStorage.getItem(localStorageKey);
   const navigate = useNavigate();
 
-  const handleButton = async () => {
-    if (userID !== null) {
-      await createSanghefte(userWord, userID).catch(console.error);
+  /* Local storage */
+  const localStorage_userIdKey = "userID";
+
+  const handleButton_createPamphlet = async () => {
+    if (pamphletTitle === "") {
+      toast({
+        title: "Feil input",
+        description: "Fyll inn Navn på Sanghefte",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
     }
+
+    /* Sjekke om localstorage allerede har en brukerID */
+    if (!localStorage.getItem(localStorage_userIdKey)) {
+      await generateUser().catch(console.error);
+    }
+
+    await sessionStorage.setItem("currentPamphlet_title", pamphletTitle);
+
+    const userID = localStorage.getItem(localStorage_userIdKey);
+
+    if (userID !== null) {
+      await createSanghefte(pamphletTitle, userID).catch(console.error);
+    }
+
     navigate("/newsong");
   };
 
@@ -44,16 +66,24 @@ export const NewPamphlet = () => {
             <Box p={5} borderRadius="lg" shadow="md" bg={bgcolor}>
               <Input
                 size="lg"
-                placeholder="Your Pin"
-                onChange={(e) => setUserWord(e.target.value)}
+                placeholder="Navn på ditt sanghefte (eks: 'Julebord')"
+                onChange={(e) => setPamphletTitle(e.target.value)}
               />
               <Button
                 isFullWidth
                 mt={3}
-                onClick={handleButton}
+                onClick={handleButton_createPamphlet}
                 //variant="outline"
               >
-                Create Sanghefte
+                Opprett Sanghefte
+              </Button>
+              <Button
+                isFullWidth
+                mt={3}
+                onClick={() => navigate("/pamphletMenu")}
+                //variant="outline"
+              >
+                Gå til Mine Hefter
               </Button>
             </Box>
           </VStack>
