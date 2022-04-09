@@ -7,11 +7,13 @@ import {
   Flex,
   Input,
   useColorModeValue,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import { createSanghefte, generateUser } from "../util/firestoreFunctions";
 
 export const NewPamphlet = () => {
+  const toast = useToast();
   const [pamphletTitle, setPamphletTitle] = useState("");
 
   const bgcolor = useColorModeValue("white", "whiteAlpha.50");
@@ -20,7 +22,18 @@ export const NewPamphlet = () => {
   /* Local storage */
   const localStorage_userIdKey = "userID";
 
-  const handleButton = async () => {
+  const handleButton_createPamphlet = async () => {
+    if (pamphletTitle === "") {
+      toast({
+        title: "Feil input",
+        description: "Fyll inn Navn på Sanghefte",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
     /* Sjekke om localstorage allerede har en brukerID */
     if (!localStorage.getItem(localStorage_userIdKey)) {
       await generateUser().catch(console.error);
@@ -59,7 +72,7 @@ export const NewPamphlet = () => {
               <Button
                 isFullWidth
                 mt={3}
-                onClick={handleButton}
+                onClick={handleButton_createPamphlet}
                 //variant="outline"
               >
                 Opprett Sanghefte

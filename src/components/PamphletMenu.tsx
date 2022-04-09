@@ -22,16 +22,12 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { sanghefteState } from "../store/store";
 
 export const PamphletMenu = () => {
   const [pamphlets, setPamphlets] = useState<Array<Pamphlet>>([]);
   const localStorageKey = "userID";
   const userID = localStorage.getItem(localStorageKey);
   const navigate = useNavigate();
-  const [, setSanghefte] = useRecoilState(sanghefteState);
-  const sanghefte = useRecoilValue(sanghefteState);
 
   const [pamphletMagicLink, setPamphletMagicLink] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -42,9 +38,10 @@ export const PamphletMenu = () => {
   const userReference = localStorage.getItem(localStorage_userReferenceKey);
 
   const updateMagicLink = () => {
-    if (userReference !== null) {
+    const pamphletTitle = sessionStorage.getItem("currentPamphlet_title");
+    if (userReference !== null && pamphletTitle !== null) {
       setPamphletMagicLink(
-        "sanghefte.no/sing/" + userReference + "/" + sanghefte
+        "sanghefte.no/sing/" + userReference + "/" + pamphletTitle
       );
     }
   };
@@ -54,15 +51,15 @@ export const PamphletMenu = () => {
       setPamphlets([]);
       if (userID) await getAllPamphlets(userID).then((r) => setPamphlets(r));
     };
-    fetchPamphlets();
+    fetchPamphlets().catch(console.error);
   }, [userID, setPamphlets]);
 
-  const deletePamphlet = async (pamphletID: string) => {
+  const handleClick_deletePamphlet = async (pamphletID: string) => {
     if (userID) await deleteSanghefte(userID, pamphletID);
     refreshPage();
   };
 
-  const handleButton = () => {
+  const handleClick_createNewPamphlet = () => {
     navigate("/pamphlet");
   };
 
@@ -70,27 +67,34 @@ export const PamphletMenu = () => {
     window.location.reload();
   }
 
-  const addSong = (songpamphlet: string) => {
-    setSanghefte(songpamphlet);
+  const handleClick_addSong = (pamphletTitle: string) => {
+    sessionStorage.setItem("currentPamphlet_title", pamphletTitle);
     navigate("/newsong");
   };
 
   return (
     <>
-      <Button onClick={handleButton}>+</Button>
+      <Button onClick={handleClick_createNewPamphlet}>+ Lag nytt hefte</Button>
       <Accordion allowToggle>
         {pamphlets.map((pamphlet) => (
           <AccordionItem key={pamphlet.id}>
             <h1>
-              <AccordionButton onClick={() => setSanghefte(pamphlet.id)}>
+              <AccordionButton
+                onClick={() =>
+                  sessionStorage.setItem("currentPamphlet_title", pamphlet.id)
+                }
+              >
                 <Box>{pamphlet.id}</Box>
               </AccordionButton>
             </h1>
             <AccordionPanel>
               <PamphletContent pamphletId={pamphlet.id!} />
               <br />
-              <Button onClick={() => deletePamphlet(pamphlet.id)}>
-                Delete pamphlet
+              <Button onClick={() => handleClick_addSong(pamphlet.id)}>
+                Legg til sang
+              </Button>
+              <Button onClick={() => handleClick_deletePamphlet(pamphlet.id)}>
+                Slett hefte
               </Button>
               <Button
                 onClick={() => {
@@ -99,9 +103,10 @@ export const PamphletMenu = () => {
                   setCopyLinkBackgroundColor("white");
                 }}
               >
-                Share
+                Del hefte
               </Button>
 
+              {/* Popup-window for Sharing */}
               <Modal isOpen={isOpen} onClose={onClose}>
                 <ModalOverlay />
                 <ModalContent>
@@ -133,8 +138,6 @@ export const PamphletMenu = () => {
                   </ModalFooter>
                 </ModalContent>
               </Modal>
-
-              <Button onClick={() => addSong(pamphlet.id)}>Add song</Button>
             </AccordionPanel>
           </AccordionItem>
         ))}
