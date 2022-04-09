@@ -32,6 +32,20 @@ export const NewPamphlet = () => {
         isClosable: true,
       });
       return;
+    } else if (
+      pamphletTitle.includes("/") ||
+      pamphletTitle.includes(".") ||
+      pamphletTitle.includes("(") ||
+      pamphletTitle.includes(")")
+    ) {
+      toast({
+        title: "Feil input",
+        description: "Navn på Sanghefte kan ikke inneholde / ) ( eller . ",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
     }
 
     /* Sjekke om localstorage allerede har en brukerID */
