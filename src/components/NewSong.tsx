@@ -20,7 +20,7 @@ export const NewSong = () => {
   const [artist, setArtist] = useState("");
   const navigate = useNavigate();
 
-  const pamphletTitle = sessionStorage.getItem("currentPamphlet_title")
+  const pamphletTitle = sessionStorage.getItem("currentPamphlet_title");
   const localStorage_userIdKey = "userID";
 
   const handleClick_addSongToPamphlet = async () => {
@@ -89,7 +89,11 @@ export const NewSong = () => {
             value={text}
             onChange={(e) => setText(e.target.value)}
           />
-          <Button onClick={handleClick_addSongToPamphlet} isFullWidth colorScheme="teal">
+          <Button
+            onClick={handleClick_addSongToPamphlet}
+            isFullWidth
+            colorScheme="teal"
+          >
             Legg til sang
           </Button>
           <Button isFullWidth onClick={handleClick_goBackToMyPamphlets}>

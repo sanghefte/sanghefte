@@ -12,7 +12,7 @@ import {
 import { createSanghefte, generateUser } from "../util/firestoreFunctions";
 
 export const NewPamphlet = () => {
-  const [pamphletTitle, setPamphletTitle] = useState("")
+  const [pamphletTitle, setPamphletTitle] = useState("");
 
   const bgcolor = useColorModeValue("white", "whiteAlpha.50");
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ export const NewPamphlet = () => {
       await generateUser().catch(console.error);
     }
 
-    await sessionStorage.setItem("currentPamphlet_title", pamphletTitle)
+    await sessionStorage.setItem("currentPamphlet_title", pamphletTitle);
 
     const userID = localStorage.getItem(localStorage_userIdKey);
 
