@@ -30,7 +30,9 @@ export const PamphletMenu = () => {
   const userID = localStorage.getItem(localStorageKey);
   const navigate = useNavigate();
 
-  const [pamphletMagicLink, setPamphletMagicLink] = useState("");
+  const [copyPamphletMagicLink, setCopyPamphletMagicLink] = useState("");
+  //For the link to be
+  const [linkTopamphlet, setLinkToPamphlet] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [copyLinkBackgroundColor, setCopyLinkBackgroundColor] =
     useState("white");
@@ -42,9 +44,10 @@ export const PamphletMenu = () => {
     const pamphletTitle = sessionStorage.getItem("currentPamphlet_title");
     if (userReference !== null && pamphletTitle !== null) {
       const pamphletMagicLink = encodeURI(
-        "sanghefte.no/sing/" + userReference + "/" + pamphletTitle
+        "/sing/" + userReference + "/" + pamphletTitle
       );
-      setPamphletMagicLink(pamphletMagicLink);
+      setCopyPamphletMagicLink("sanghefte.no" + pamphletMagicLink);
+      setLinkToPamphlet(pamphletMagicLink);
     }
   };
 
@@ -115,9 +118,9 @@ export const PamphletMenu = () => {
                   <ModalHeader>Link til ditt hefte:</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody>
-                    <p>{pamphletMagicLink}</p>
+                    <a href={linkTopamphlet}>{copyPamphletMagicLink}</a>
                     <QRCodeSVG
-                      value={pamphletMagicLink}
+                      value={copyPamphletMagicLink}
                       size={128}
                       bgColor={"#ffffff"}
                       fgColor={"#000000"}
@@ -137,7 +140,7 @@ export const PamphletMenu = () => {
                       backgroundColor={copyLinkBackgroundColor}
                       variant="ghost"
                       onClick={() => {
-                        navigator.clipboard.writeText(pamphletMagicLink);
+                        navigator.clipboard.writeText(copyPamphletMagicLink);
                         setCopyLinkBackgroundColor("#4BB543");
                       }}
                     >
