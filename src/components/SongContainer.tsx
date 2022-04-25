@@ -39,12 +39,18 @@ export const SongContainer = () => {
     fetchSongs().catch(console.error);
   }, [userID, pamphletName]);
 
+  const scrollTop = () => {
+    window.scrollTo(0, 0);
+  };
+
   return (
     <div className="carousel-wrapper">
       <Carousel
         swipeScrollTolerance={100}
+        preventMovementUntilSwipeScrollTolerance={true}
         showIndicators={false}
         showThumbs={false}
+        onSwipeEnd={scrollTop}
       >
         {data &&
           data.map((d, index) => {
