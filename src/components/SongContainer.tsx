@@ -66,6 +66,5 @@ export const SongContainer = () => {
           })}
       </Carousel>
     </div>
-
   );
 };
