@@ -50,7 +50,7 @@ export const SongContainer = () => {
         preventMovementUntilSwipeScrollTolerance={true}
         showIndicators={false}
         showThumbs={false}
-        onSwipeEnd={scrollTop}
+        onChange={scrollTop}
       >
         {data &&
           data.map((d, index) => {
