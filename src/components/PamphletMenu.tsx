@@ -117,7 +117,13 @@ export const PamphletMenu = () => {
                   <ModalHeader>Link til ditt hefte:</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody>
-                    <a href={linkTopamphlet} target={"_blank"} rel={"noopener noreferrer"}>{linkTopamphlet}</a>
+                    <a
+                      href={linkTopamphlet}
+                      target={"_blank"}
+                      rel={"noopener noreferrer"}
+                    >
+                      {linkTopamphlet}
+                    </a>
                     <QRCodeSVG
                       value={linkTopamphlet}
                       size={128}
