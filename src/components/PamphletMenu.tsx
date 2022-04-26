@@ -30,9 +30,9 @@ export const PamphletMenu = () => {
   const userID = localStorage.getItem(localStorageKey);
   const navigate = useNavigate();
 
-  const [copyPamphletMagicLink, setCopyPamphletMagicLink] = useState("");
-  //For the link to be
+  // Magic link
   const [linkTopamphlet, setLinkToPamphlet] = useState("");
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [copyLinkBackgroundColor, setCopyLinkBackgroundColor] =
     useState("white");
@@ -46,8 +46,7 @@ export const PamphletMenu = () => {
       const pamphletMagicLink = encodeURI(
         "/sing/" + userReference + "/" + pamphletTitle
       );
-      setCopyPamphletMagicLink("sanghefte.no" + pamphletMagicLink);
-      setLinkToPamphlet(pamphletMagicLink);
+      setLinkToPamphlet("https://sanghefte.no" + pamphletMagicLink);
     }
   };
 
@@ -118,9 +117,15 @@ export const PamphletMenu = () => {
                   <ModalHeader>Link til ditt hefte:</ModalHeader>
                   <ModalCloseButton />
                   <ModalBody>
-                    <a href={linkTopamphlet}>{copyPamphletMagicLink}</a>
+                    <a
+                      href={linkTopamphlet}
+                      target={"_blank"}
+                      rel={"noopener noreferrer"}
+                    >
+                      {linkTopamphlet}
+                    </a>
                     <QRCodeSVG
-                      value={copyPamphletMagicLink}
+                      value={linkTopamphlet}
                       size={128}
                       bgColor={"#ffffff"}
                       fgColor={"#000000"}
@@ -140,7 +145,7 @@ export const PamphletMenu = () => {
                       backgroundColor={copyLinkBackgroundColor}
                       variant="ghost"
                       onClick={() => {
-                        navigator.clipboard.writeText(copyPamphletMagicLink);
+                        navigator.clipboard.writeText(linkTopamphlet);
                         setCopyLinkBackgroundColor("#4BB543");
                       }}
                     >
