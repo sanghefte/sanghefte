@@ -51,11 +51,12 @@ export const SongContainer = () => {
         showIndicators={false}
         showThumbs={false}
         onChange={scrollTop}
+        dynamicHeight={true}
       >
         {data &&
           data.map((d, index) => {
             return (
-              <Container key={index}>
+              <Container key={index} style={{minHeight:"100vh"}}>
                 <Heading mt={5}>{d.title}</Heading>
                 <Text as="i">Av: {d.creator}</Text>
                 <Text style={{ whiteSpace: "pre-wrap" }} mt={3}>
