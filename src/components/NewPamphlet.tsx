@@ -5,12 +5,14 @@ import {
   Button,
   Container,
   Flex,
+  Heading,
   Input,
   useColorModeValue,
   useToast,
   VStack,
 } from "@chakra-ui/react";
 import { createSanghefte, generateUser } from "../util/firestoreFunctions";
+import { Header } from "./Header";
 
 export const NewPamphlet = () => {
   const toast = useToast();
@@ -65,7 +67,7 @@ export const NewPamphlet = () => {
   };
 
   return (
-    <Box>
+    <Box backgroundColor="dodgerblue">
       <Flex
         align="center"
         justify={{ base: "center", md: "space-around", xl: "space-between" }}
@@ -75,7 +77,10 @@ export const NewPamphlet = () => {
         px={8}
         //bg="blue.800"
       >
-        <Container>
+        <Container centerContent>
+          <Heading p={10} size={"4xl"} color={"white"} boxShadow="dark-lg">
+            Sanghefte!
+          </Heading>
           <VStack>
             <Box p={5} borderRadius="lg" shadow="md" bg={bgcolor}>
               <Input
