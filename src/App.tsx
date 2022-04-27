@@ -20,10 +20,13 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage />} />
             <Route path="/newsong" element={<NewSong />} />
+
             <Route
-              path="/sing/:userReference/:pamphletName"
+              path="/sing/:userReference/:pamphletName
+              "
               element={<SongContainer />}
             />
+
             <Route path="/updatesong" element={<UpdateSong />} />
             <Route path="/pamphlet" element={<NewPamphlet />} />
             <Route path="/pamphletMenu" element={<PamphletMenu />} />
