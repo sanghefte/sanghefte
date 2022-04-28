@@ -80,7 +80,8 @@ export const NewPamphlet = () => {
             <Box p={5} borderRadius="lg" shadow="md" bg={bgcolor}>
               <Input
                 size="lg"
-                placeholder="Navn på ditt sanghefte (eks: 'Julebord')"
+                placeholder="Navn på ditt sanghefte"
+                textAlign={"center"}
                 onChange={(e) => setPamphletTitle(e.target.value)}
               />
               <Button
