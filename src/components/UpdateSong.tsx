@@ -89,7 +89,7 @@ export const UpdateSong = () => {
     >
       <Container>
         <VStack p={7} borderRadius={6} bg={"whitesmoke"} spacing={3}>
-          <Heading>REDIGER SANG</Heading>
+          <Heading>Rediger sang</Heading>
           <Divider />
           <Heading size="sm"> Tittel </Heading>
           <Input
