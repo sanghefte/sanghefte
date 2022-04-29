@@ -120,11 +120,6 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
     refreshPage();
   };
 
-  const testMethod = (songID: string) => {
-    console.log(songID);
-    handleClick_updateSong(songID);
-  };
-
   const refreshPage = () => {
     window.location.reload();
   };
@@ -169,7 +164,7 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
                         aria-label="update song"
                         size={"xs"}
                         icon={<EditIcon />}
-                        onClick={() => testMethod(song.id)}
+                        onClick={() => handleClick_updateSong(song.id)}
                       />
                     </Tooltip>
                     <Tooltip label="Slett sang" fontSize="sm">
