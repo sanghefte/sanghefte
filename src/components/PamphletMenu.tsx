@@ -78,7 +78,7 @@ export const PamphletMenu = () => {
                   </AccordionItem>
                 ))}
                 <AccordionItem>
-                  <AccordionButton onClick={handleClick_createNewPamphlet} marginTop={5} bg={"green.100"} _hover={{bg: "green.200"}}>
+                  <AccordionButton onClick={handleClick_createNewPamphlet} borderRadius={5} marginTop={5} bg={"green.100"} _hover={{bg: "green.200"}}>
                     <Box flex={"1"} textAlign={"left"}>Opprett nytt sanghefte</Box>
                     <AddIcon fontSize='10px' marginRight={1} />
                   </AccordionButton>

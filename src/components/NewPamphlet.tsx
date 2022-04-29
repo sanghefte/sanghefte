@@ -11,6 +11,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { createSanghefte, generateUser } from "../util/firestoreFunctions";
+import backgroundImage from "../assets/background_image.jpg";
 
 export const NewPamphlet = () => {
   const toast = useToast();
@@ -73,7 +74,10 @@ export const NewPamphlet = () => {
         wrap="nowrap"
         minH="100vh"
         px={8}
-        //bg="blue.800"
+        backgroundImage={backgroundImage}
+        backgroundSize={"cover"}
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
       >
         <Container>
           <VStack>
