@@ -68,10 +68,7 @@ export const PamphletMenu = () => {
     fetchPamphlets().catch(console.error);
   }, [userID, setPamphlets]);
 
-  const handleClick_deletePamphlet = async (pamphletID: string) => {
-    if (userID) await deleteSanghefte(userID, pamphletID);
-    refreshPage();
-  };
+
 
   const handleClick_createNewPamphlet = () => {
     navigate("/pamphlet");
@@ -112,7 +109,7 @@ export const PamphletMenu = () => {
                         onClick={() =>
                           sessionStorage.setItem("currentPamphlet_title", pamphlet.id)
                         }
-                        _expanded={{ bg: "blue.50" }}
+                        _expanded={{ bg: "purple.100", border: "0.2px purple", borderRadius: 5 }}
                       >
                         <Box flex={"1"} textAlign={"left"}>{pamphlet.id}</Box>
                         <AccordionIcon />
@@ -189,7 +186,7 @@ export const PamphletMenu = () => {
 
                 ))}
                 <AccordionItem>
-                  <AccordionButton onClick={handleClick_createNewPamphlet} marginTop={5} bg={"green.100"} _hover={{bg: "green.100"}}>
+                  <AccordionButton onClick={handleClick_createNewPamphlet} marginTop={5} bg={"green.100"} _hover={{bg: "green.200"}}>
                     <Box flex={"1"} textAlign={"left"}>Opprett nytt sanghefte</Box>
                     <AddIcon fontSize='10px' marginRight={1} />
                   </AccordionButton>
