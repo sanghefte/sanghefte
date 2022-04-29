@@ -16,6 +16,7 @@ import {
   getSong,
   Song,
 } from "../util/firestoreFunctions";
+import backgroundImage from "../assets/background_image.jpg";
 
 export const UpdateSong = () => {
   const toast = useToast();
@@ -82,10 +83,14 @@ export const UpdateSong = () => {
       wrap="nowrap"
       minH="100vh"
       px={8}
+      backgroundImage={backgroundImage}
+      backgroundSize={"cover"}
+      backgroundPosition="center"
+      backgroundRepeat="no-repeat"
     >
       <Container>
-        <VStack spacing={3}>
-          <Heading>Rediger sang</Heading>
+        <VStack p={7} borderRadius={6} bg={"whitesmoke"} spacing={3}>
+          <Heading>REDIGER SANG</Heading>
           <Divider />
           <Heading size="sm"> Tittel </Heading>
           <Input
