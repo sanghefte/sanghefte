@@ -3,25 +3,26 @@ import { deleteSanghefte, deleteSong, getAllSongs, Song } from "../util/firestor
 import {
   Accordion,
   Button,
-  Container,
   VStack,
   AccordionItem,
   AccordionButton,
   Box,
-  AccordionIcon,
-  AccordionPanel,
-  Heading, Divider,
-  Center, HStack, Flex, IconButton,
-  Text, Tooltip, useDisclosure,
+  Heading,
+  Flex,
+  IconButton,
+  Text,
+  Tooltip,
+  useDisclosure,
   AlertDialog,
   AlertDialogBody,
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogContent,
-  AlertDialogOverlay,
+  AlertDialogOverlay, ModalFooter, ModalBody, Modal, ModalOverlay, ModalContent, ModalHeader, ModalCloseButton
 } from "@chakra-ui/react";
-import { AddIcon, ViewIcon, DeleteIcon, LinkIcon, EmailIcon, EditIcon } from "@chakra-ui/icons";
+import { AddIcon, ViewIcon, DeleteIcon, LinkIcon, EditIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router-dom";
+import { QRCodeSVG } from "qrcode.react";
 
 export const PamphletContent: React.FC<{ pamphletId: string }> = ({
   pamphletId,
@@ -32,7 +33,38 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
   const [songsData, setSongsData] = useState<Array<Song>>([]);
 
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: isOpenShare, onOpen: onOpenShare, onClose: onCloseShare } = useDisclosure()
   const cancelRef = useRef<HTMLButtonElement>(null);
+
+  // Magic link
+  const [linkTopamphlet, setLinkToPamphlet] = useState("");
+  const [copyLinkBackgroundColor, setCopyLinkBackgroundColor] =
+    useState("white");
+
+  const localStorage_userReferenceKey = "userReference";
+  const userReference = localStorage.getItem(localStorage_userReferenceKey);
+
+  const updateMagicLink = () => {
+    const pamphletTitle = sessionStorage.getItem("currentPamphlet_title");
+    if (userReference !== null && pamphletTitle !== null) {
+      const pamphletMagicLink = encodeURI(
+        "/sing/" + userReference + "/" + pamphletTitle
+      );
+      setLinkToPamphlet("https://sanghefte.no" + pamphletMagicLink);
+    }
+  };
+
+  const redirectToPamphletView = () => {
+    const pamphletTitle = sessionStorage.getItem("currentPamphlet_title");
+    if (userReference !== null && pamphletTitle !== null) {
+      const pamphletMagicLink = encodeURI(
+        "/sing/" + userReference + "/" + pamphletTitle
+      );
+      window.open("https://sanghefte.no" + pamphletMagicLink, "_blank");
+    }
+  }
+
+  require("qrcode.react");
 
   useEffect(() => {
     const displayPamphletInfo = async (pamphletID: string) => {
@@ -54,6 +86,11 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
     navigate("/updatesong");
   };
 
+  const handleClick_addSong = (pamphletTitle: string) => {
+    sessionStorage.setItem("currentPamphlet_title", pamphletTitle);
+    navigate("/newsong");
+  };
+
   const handleClick_deleteSong = async (songID: string) => {
     const pamphletTitle = await sessionStorage.getItem("currentPamphlet_title");
     if (userID && pamphletTitle !== null)
@@ -61,18 +98,22 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
     refreshPage();
   };
 
+  const testMethod = (songID: string) => {
+    console.log(songID);
+    handleClick_updateSong(songID);
+  }
+
   const refreshPage = () => {
     window.location.reload();
   };
 
   return (
     <>
-          <VStack bg={"white"} marginTop={-1} p={{base: 3, md: 6, xl: 10}} borderRadius="md" shadow="md">
 
+          <VStack bg={"white"} marginTop={-1} p={{base: 3, md: 6, xl: 10}} borderRadius="md" shadow="md">
             <Box>
               <Heading size={"md"} marginTop={{base: 0, md: -2}} marginBottom={2}>Sangliste</Heading>
             </Box>
-
 
             <Accordion allowToggle w={"100%"}>
               {songsData &&
@@ -81,20 +122,22 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
                     <Flex
                       align="center"
                       justify={{ base: "space-between", md: "space-between", xl: "space-between" }}
-                      direction={{ base: "row", md: "row" }}
+                      direction={{ base: "row" }}
                       wrap="nowrap"
                       h={"40px"}
                       paddingLeft={4}
                     >
-                        <Text >{song.title}</Text>
+                        <Text>{song.title}</Text>
                       <Box>
                         <Tooltip label='Rediger sang' fontSize='sm'>
-                          <IconButton variant='outline'
+                          <IconButton
+                                      variant='outline'
                                       colorScheme='teal'
-                                      aria-label='Send email'
+                                      aria-label='update song'
                                       size={"xs"}
                                       icon={<EditIcon />}
-                                      onClick={() => handleClick_updateSong(song.id)}
+                                      onClick={() => testMethod(song.id)}
+
                           />
                         </Tooltip>
                         <Tooltip label='Slett sang' fontSize='sm'>
@@ -115,7 +158,7 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
                 ])
               }
               <AccordionItem>
-                <AccordionButton bg={"green.50"} _hover={{bg: "green.100"}}>
+                <AccordionButton onClick={() => handleClick_addSong(pamphletId)} bg={"green.50"} _hover={{bg: "green.100"}}>
                   <Box flex={"1"} textAlign={"left"}>Ny sang</Box>
                   <AddIcon fontSize='10px' marginRight={1} />
                 </AccordionButton>
@@ -131,8 +174,18 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
               h={{base: "150px", sm: "100px"}}
               paddingTop={{base: 4, md: 2}}
             >
-              <Button w={{base: "90%"}} fontSize={{base: "sm", md: "md"}} flex={0.3} rightIcon={<ViewIcon />} bg={"green.200"} _hover={{bg: "green.300"}}>Vis hefte</Button>
-              <Button w={{base: "90%"}} fontSize={{base: "sm", md: "md"}} flex={0.3} rightIcon={<LinkIcon />} bg={"blue.200"} _hover={{bg: "blue.300"}}>Del</Button>
+              <Button onClick={redirectToPamphletView} w={{base: "90%"}} fontSize={{base: "sm", md: "md"}} flex={0.3} rightIcon={<ViewIcon />} bg={"green.200"} _hover={{bg: "green.300"}}><a
+                href={linkTopamphlet}
+                target={"_blank"}
+                rel={"noopener noreferrer"}
+              >
+                Vis hefte
+              </a></Button>
+              <Button onClick={() => {
+                onOpenShare();
+                updateMagicLink();
+                setCopyLinkBackgroundColor("white");
+              }} w={{base: "90%"}} fontSize={{base: "sm", md: "md"}} flex={0.3} rightIcon={<LinkIcon />} bg={"blue.200"} _hover={{bg: "blue.300"}}>Del</Button>
               <Button onClick={onOpen} w={{base: "90%"}} fontSize={{base: "sm", md: "md"}} flex={0.3} rightIcon={<DeleteIcon/>} bg={"red.300"} _hover={{bg: "red.400"}}>Slett hefte</Button>
 
               {/* Alert window for Deleting Pamphlet */}
@@ -162,6 +215,53 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
                   </AlertDialogContent>
                 </AlertDialogOverlay>
               </AlertDialog>
+
+              {/*Popup-window for Sharing*/}
+              <Modal isOpen={isOpenShare} onClose={onCloseShare}>
+                <ModalOverlay />
+                <ModalContent>
+                  <ModalHeader>Link til ditt hefte:</ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody>
+                    <a
+                      href={linkTopamphlet}
+                      target={"_blank"}
+                      rel={"noopener noreferrer"}
+                    >
+                      {linkTopamphlet}
+                    </a>
+                    <QRCodeSVG
+                      value={linkTopamphlet}
+                      size={128}
+                      bgColor={"#ffffff"}
+                      fgColor={"#000000"}
+                      level={"L"}
+                      includeMargin={false}
+                    />
+                  </ModalBody>
+
+                  <ModalFooter>
+                    <Button colorScheme="blue" mr={3} onClick={onCloseShare}>
+                      Lukk
+                    </Button>
+                    <Button
+                      color={
+                        copyLinkBackgroundColor === "white" ? "black" : "white"
+                      }
+                      backgroundColor={copyLinkBackgroundColor}
+                      variant="ghost"
+                      onClick={() => {
+                        navigator.clipboard.writeText(linkTopamphlet);
+                        setCopyLinkBackgroundColor("#4BB543");
+                      }}
+                    >
+                      {copyLinkBackgroundColor === "white"
+                        ? "Kopiér Link"
+                        : "Link Kopiert!"}
+                    </Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
             </Flex>
 
             <Box>

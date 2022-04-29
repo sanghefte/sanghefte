@@ -72,7 +72,7 @@ export const UpdateSong = () => {
     }
     getSongFromDb().catch(console.error)
 
-  }, [pamphlet_title, songID]);
+  }, [pamphlet_title, songID, userID]);
 
   return (
     <Flex
