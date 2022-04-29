@@ -70,9 +70,8 @@ export const UpdateSong = () => {
           updateValueOfFields(r)
         );
       }
-    }
-    getSongFromDb().catch(console.error)
-
+    };
+    getSongFromDb().catch(console.error);
   }, [pamphlet_title, songID, userID]);
 
   return (
