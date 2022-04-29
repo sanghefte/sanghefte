@@ -222,7 +222,6 @@ export const deleteSong = async (
     songTitle
   );
   await deleteDoc(docRef);
-  console.log("Deleted " + songTitle);
 };
 
 export const getUserIdFromReference = async (
