@@ -50,7 +50,7 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
   const navigate = useNavigate();
   const [songsData, setSongsData] = useState<Array<Song>>([]);
 
-  const [deleteSongOrPamphlet, setDeleteSongOrPamphlet] = useState("pamphlet")
+  const [deleteSongOrPamphlet, setDeleteSongOrPamphlet] = useState("pamphlet");
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
@@ -157,7 +157,9 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
                   h={"40px"}
                   paddingLeft={4}
                 >
-                  <Text fontSize={{base: 13, sm: 17}}>{(song.title).substring(0, 20)}</Text>
+                  <Text fontSize={{ base: 13, sm: 17 }}>
+                    {song.title.substring(0, 20)}
+                  </Text>
                   <Box>
                     <Tooltip label="Rediger sang" fontSize="sm">
                       <IconButton
@@ -178,7 +180,10 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
                         marginLeft={1}
                         bg={"red.50"}
                         _hover={{ bg: "red.300" }}
-                        onClick={() => {setDeleteSongOrPamphlet(song.id); onOpen()}}
+                        onClick={() => {
+                          setDeleteSongOrPamphlet(song.id);
+                          onOpen();
+                        }}
                         icon={<DeleteIcon />}
                       />
                     </Tooltip>
@@ -247,7 +252,10 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
             Del
           </Button>
           <Button
-            onClick={() => {setDeleteSongOrPamphlet("pamphlet"); onOpen()}}
+            onClick={() => {
+              setDeleteSongOrPamphlet("pamphlet");
+              onOpen();
+            }}
             w={{ base: "90%" }}
             fontSize={{ base: "sm", md: "md" }}
             flex={0.3}
@@ -267,7 +275,9 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
             <AlertDialogOverlay>
               <AlertDialogContent>
                 <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                  {deleteSongOrPamphlet === "pamphlet" ? "Slett sanghefte" : "Slett sang"}
+                  {deleteSongOrPamphlet === "pamphlet"
+                    ? "Slett sanghefte"
+                    : "Slett sang"}
                 </AlertDialogHeader>
 
                 <AlertDialogBody>
@@ -295,7 +305,9 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
                     }}
                     ml={3}
                   >
-                    {deleteSongOrPamphlet === "pamphlet" ? "Slett hefte" : "Slett sang"}
+                    {deleteSongOrPamphlet === "pamphlet"
+                      ? "Slett hefte"
+                      : "Slett sang"}
                   </Button>
                 </AlertDialogFooter>
               </AlertDialogContent>

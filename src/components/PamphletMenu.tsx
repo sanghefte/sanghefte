@@ -60,7 +60,7 @@ export const PamphletMenu = () => {
             <Box
               bg={"whitesmoke"}
               w={{ base: "90vw", md: "60vw", lg: "60vw", xl: "30vw" }}
-              minW={{base: "90vw", lg: "550px"}}
+              minW={{ base: "90vw", lg: "550px" }}
               maxW={"600px"}
               p={{ base: 5, md: 7, xl: 10 }}
               borderRadius="lg"
