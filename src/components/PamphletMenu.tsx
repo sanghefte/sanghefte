@@ -46,6 +46,7 @@ export const PamphletMenu = () => {
         wrap="nowrap"
         minH="100vh"
         px={8}
+        p={5}
         backgroundImage={backgroundImage}
         backgroundSize={"cover"}
         backgroundPosition="center"
@@ -58,7 +59,8 @@ export const PamphletMenu = () => {
             </Heading>
             <Box
               bg={"whitesmoke"}
-              w={{ base: "90vw", md: "60vw", xl: "30vw" }}
+              w={{ base: "90vw", md: "60vw", lg: "60vw", xl: "30vw" }}
+              minW={{ base: "90vw", lg: "550px" }}
               maxW={"600px"}
               p={{ base: 5, md: 7, xl: 10 }}
               borderRadius="lg"
