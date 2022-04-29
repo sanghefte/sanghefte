@@ -118,7 +118,11 @@ export const UpdateSong = () => {
           >
             Lagre endringer
           </Button>
-          <Button rightIcon={<ArrowBackIcon marginTop={1} />} isFullWidth onClick={handleClick_backToMenu}>
+          <Button
+            rightIcon={<ArrowBackIcon marginTop={1} />}
+            isFullWidth
+            onClick={handleClick_backToMenu}
+          >
             Tilbake
           </Button>
         </VStack>

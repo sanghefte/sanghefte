@@ -105,7 +105,7 @@ export const NewPamphlet = () => {
                 mt={3}
                 onClick={handleButton_createPamphlet}
                 bg={"green.100"}
-                _hover={{bg: "green.200"}}
+                _hover={{ bg: "green.200" }}
                 //variant="outline"
               >
                 Opprett Sanghefte
@@ -114,7 +114,7 @@ export const NewPamphlet = () => {
                 isFullWidth
                 mt={3}
                 onClick={() => navigate("/pamphletMenu")}
-                rightIcon={<HamburgerIcon marginTop={1} fontSize={12}/>}
+                rightIcon={<HamburgerIcon marginTop={1} fontSize={12} />}
                 //variant="outline"
               >
                 Gå til Mine Hefter

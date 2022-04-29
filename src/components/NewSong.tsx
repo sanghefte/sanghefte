@@ -103,7 +103,11 @@ export const NewSong = () => {
           >
             Legg til sang
           </Button>
-          <Button isFullWidth onClick={handleClick_goBackToMyPamphlets} rightIcon={<ArrowBackIcon marginTop={1} />}>
+          <Button
+            isFullWidth
+            onClick={handleClick_goBackToMyPamphlets}
+            rightIcon={<ArrowBackIcon marginTop={1} />}
+          >
             Tilbake til Mine Sanghefter
           </Button>
         </VStack>
