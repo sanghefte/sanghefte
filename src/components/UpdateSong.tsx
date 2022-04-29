@@ -17,6 +17,7 @@ import {
   Song,
 } from "../util/firestoreFunctions";
 import backgroundImage from "../assets/background_image.jpg";
+import { ArrowBackIcon, CheckIcon } from "@chakra-ui/icons";
 
 export const UpdateSong = () => {
   const toast = useToast();
@@ -113,10 +114,11 @@ export const UpdateSong = () => {
             onClick={handleClick_updateSong}
             isFullWidth
             colorScheme="teal"
+            rightIcon={<CheckIcon marginTop={1} />}
           >
             Lagre endringer
           </Button>
-          <Button isFullWidth onClick={handleClick_backToMenu}>
+          <Button rightIcon={<ArrowBackIcon marginTop={1} />} isFullWidth onClick={handleClick_backToMenu}>
             Tilbake
           </Button>
         </VStack>
