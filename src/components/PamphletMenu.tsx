@@ -54,7 +54,7 @@ export const PamphletMenu = () => {
         <Container>
           <VStack>
             <Heading color={"white"} marginBottom={5}>
-              MINE HEFTER
+              Mine sanghefter
             </Heading>
             <Box
               bg={"whitesmoke"}
