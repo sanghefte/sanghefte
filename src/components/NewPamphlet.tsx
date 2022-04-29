@@ -5,6 +5,7 @@ import {
   Button,
   Container,
   Flex,
+  Heading,
   Input,
   useColorModeValue,
   useToast,
@@ -12,8 +13,11 @@ import {
 } from "@chakra-ui/react";
 import { createSanghefte, generateUser } from "../util/firestoreFunctions";
 import backgroundImage from "../assets/background_image.jpg";
+import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
 
 export const NewPamphlet = () => {
+  const { width, height } = useWindowSize();
   const toast = useToast();
   const [pamphletTitle, setPamphletTitle] = useState("");
 
@@ -67,6 +71,7 @@ export const NewPamphlet = () => {
 
   return (
     <Box>
+      <Confetti width={width} height={height} numberOfPieces={60} />
       <Flex
         align="center"
         justify={{ base: "center", md: "space-around", xl: "space-between" }}
@@ -81,6 +86,12 @@ export const NewPamphlet = () => {
       >
         <Container>
           <VStack>
+            <Heading color={"yellow"} marginBottom={3} size={"2xl"}>
+              Sanghefte.no
+            </Heading>
+            <Heading color={"yellow.200"} paddingBottom={10} size={"lg"}>
+              Lag, del og syng!
+            </Heading>
             <Box p={5} borderRadius="lg" shadow="md" bg={bgcolor}>
               <Input
                 size="lg"
