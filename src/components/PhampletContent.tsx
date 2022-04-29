@@ -140,7 +140,7 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
       >
         <Box>
           <Heading size={"md"} marginTop={{ base: 0, md: -2 }} marginBottom={2}>
-            Sangliste
+            Sanger
           </Heading>
         </Box>
 
