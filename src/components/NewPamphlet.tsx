@@ -15,6 +15,7 @@ import { createSanghefte, generateUser } from "../util/firestoreFunctions";
 import backgroundImage from "../assets/background_image.jpg";
 import Confetti from "react-confetti";
 import useWindowSize from "react-use/lib/useWindowSize";
+import { HamburgerIcon } from "@chakra-ui/icons";
 
 export const NewPamphlet = () => {
   const { width, height } = useWindowSize();
@@ -103,6 +104,8 @@ export const NewPamphlet = () => {
                 isFullWidth
                 mt={3}
                 onClick={handleButton_createPamphlet}
+                bg={"green.100"}
+                _hover={{ bg: "green.200" }}
                 //variant="outline"
               >
                 Opprett Sanghefte
@@ -111,6 +114,7 @@ export const NewPamphlet = () => {
                 isFullWidth
                 mt={3}
                 onClick={() => navigate("/pamphletMenu")}
+                rightIcon={<HamburgerIcon marginTop={1} fontSize={12} />}
                 //variant="outline"
               >
                 Gå til Mine Hefter
