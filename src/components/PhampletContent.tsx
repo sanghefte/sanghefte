@@ -107,7 +107,9 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
 
   const handleClick_updateSong = (songID: string) => {
     sessionStorage.setItem("currentSong_id", songID);
-    navigate("/updatesong");
+    setTimeout(() => {
+      navigate("/updatesong");
+    }, 50);
   };
 
   const handleClick_addSong = (pamphletTitle: string) => {
