@@ -46,6 +46,7 @@ export const PamphletMenu = () => {
         wrap="nowrap"
         minH="100vh"
         px={8}
+        p={5}
         backgroundImage={backgroundImage}
         backgroundSize={"cover"}
         backgroundPosition="center"

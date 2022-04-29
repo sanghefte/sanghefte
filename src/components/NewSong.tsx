@@ -12,6 +12,8 @@ import {
 } from "@chakra-ui/react";
 import { createSong } from "../util/firestoreFunctions";
 import { useNavigate } from "react-router-dom";
+import backgroundImage from "../assets/background_image.jpg";
+import { ArrowBackIcon, SmallAddIcon } from "@chakra-ui/icons";
 
 export const NewSong = () => {
   const toast = useToast(); //ChakraUI funksjon for å få en bekreftelses-toast https://chakra-ui.com/docs/feedback/toast
@@ -62,9 +64,13 @@ export const NewSong = () => {
       wrap="nowrap"
       minH="100vh"
       px={8}
+      backgroundImage={backgroundImage}
+      backgroundSize={"cover"}
+      backgroundPosition="center"
+      backgroundRepeat="no-repeat"
     >
       <Container>
-        <VStack spacing={3}>
+        <VStack bg={"whitesmoke"} p={7} borderRadius={"lg"} spacing={3}>
           <Heading>Legg til ny sang i</Heading>
           <Heading>{pamphletTitle}</Heading>
           <Divider />
@@ -93,10 +99,11 @@ export const NewSong = () => {
             onClick={handleClick_addSongToPamphlet}
             isFullWidth
             colorScheme="teal"
+            rightIcon={<SmallAddIcon marginTop={1} />}
           >
             Legg til sang
           </Button>
-          <Button isFullWidth onClick={handleClick_goBackToMyPamphlets}>
+          <Button isFullWidth onClick={handleClick_goBackToMyPamphlets} rightIcon={<ArrowBackIcon marginTop={1} />}>
             Tilbake til Mine Sanghefter
           </Button>
         </VStack>
