@@ -30,9 +30,9 @@ export const UpdateSong = () => {
   const songID = sessionStorage.getItem("currentSong_id");
   const pamphlet_title = sessionStorage.getItem("currentPamphlet_title");
 
-  const handleClick_updateSong = () => {
+  const handleClick_updateSong = async () => {
     if (userID !== null && songID !== null && pamphlet_title !== null) {
-      updateSongInPamphlet(
+      await updateSongInPamphlet(
         userID,
         pamphlet_title,
         songID,
@@ -62,10 +62,16 @@ export const UpdateSong = () => {
 
   useEffect(() => {
     const userID = localStorage.getItem(localStorage_userIdKey);
-    if (userID && pamphlet_title && songID)
-      getSong(userID, pamphlet_title, songID).then((r) =>
-        updateValueOfFields(r)
-      );
+
+    const getSongFromDb = async () => {
+      if (userID && pamphlet_title && songID) {
+        await getSong(userID, pamphlet_title, songID).then((r) =>
+          updateValueOfFields(r)
+        );
+      }
+    }
+    getSongFromDb().catch(console.error)
+
   }, [pamphlet_title, songID]);
 
   return (
