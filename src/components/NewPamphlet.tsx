@@ -5,14 +5,19 @@ import {
   Button,
   Container,
   Flex,
+  Heading,
   Input,
   useColorModeValue,
   useToast,
   VStack,
 } from "@chakra-ui/react";
 import { createSanghefte, generateUser } from "../util/firestoreFunctions";
+import backgroundImage from "../assets/background_image.jpg";
+import Confetti from "react-confetti";
+import useWindowSize from "react-use/lib/useWindowSize";
 
 export const NewPamphlet = () => {
+  const { width, height } = useWindowSize();
   const toast = useToast();
   const [pamphletTitle, setPamphletTitle] = useState("");
 
@@ -66,6 +71,7 @@ export const NewPamphlet = () => {
 
   return (
     <Box>
+      <Confetti width={width} height={height} numberOfPieces={60} />
       <Flex
         align="center"
         justify={{ base: "center", md: "space-around", xl: "space-between" }}
@@ -73,21 +79,32 @@ export const NewPamphlet = () => {
         wrap="nowrap"
         minH="100vh"
         px={8}
-        //bg="blue.800"
+        backgroundImage={backgroundImage}
+        backgroundSize={"cover"}
+        backgroundPosition="center"
+        backgroundRepeat="no-repeat"
       >
         <Container>
           <VStack>
+            <Heading color={"yellow"} marginBottom={3} size={"2xl"}>
+              Sanghefte.no
+            </Heading>
+            <Heading color={"yellow.200"} paddingBottom={10} size={"lg"}>
+              Lag, del og syng!
+            </Heading>
             <Box p={5} borderRadius="lg" shadow="md" bg={bgcolor}>
               <Input
                 size="lg"
-                placeholder="Navn på ditt sanghefte (eks: 'Julebord')"
+                placeholder="Navn på ditt sanghefte"
+                textAlign={"center"}
                 onChange={(e) => setPamphletTitle(e.target.value)}
               />
               <Button
                 isFullWidth
                 mt={3}
                 onClick={handleButton_createPamphlet}
-                //variant="outline"
+                bg={"green.100"}
+                _hover={{ bg: "green.200" }}
               >
                 Opprett Sanghefte
               </Button>
@@ -95,7 +112,6 @@ export const NewPamphlet = () => {
                 isFullWidth
                 mt={3}
                 onClick={() => navigate("/pamphletMenu")}
-                //variant="outline"
               >
                 Gå til Mine Hefter
               </Button>
