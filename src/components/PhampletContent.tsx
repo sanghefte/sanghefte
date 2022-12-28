@@ -230,13 +230,7 @@ export const PamphletContent: React.FC<{ pamphletId: string }> = ({
             bg={"green.200"}
             _hover={{ bg: "green.300" }}
           >
-            <a
-              href={linkTopamphlet}
-              target={"_blank"}
-              rel={"noopener noreferrer"}
-            >
-              Vis hefte
-            </a>
+            Vis hefte
           </Button>
           <Button
             onClick={() => {

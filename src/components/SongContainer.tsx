@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Text, Heading } from "@chakra-ui/react";
+import { Container, Text, Heading, Divider, Link } from "@chakra-ui/react";
 import {
   getAllSongs,
   getUserIdFromReference,
@@ -66,6 +66,8 @@ export const SongContainer = () => {
             );
           })}
       </Carousel>
+      <Divider />
+      <Text>Dette sangheftet er laget på <Link href="https://sanghefte.no" isExternal>sanghefte.no</Link></Text>
     </div>
   );
 };
